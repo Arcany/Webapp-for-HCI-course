@@ -1,0 +1,45 @@
+@import '../vars';
+
+.topbar {
+  background: $primaryColor;
+}
+
+.brand {
+  a {
+    color: #f9f9f9;
+    font-weight: 600;
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.toggleBtn {
+  background-color: #f0f0f0;
+}
+
+.userActions {
+  margin-left: auto;
+}
+
+.iconBtn {
+  color: #000;
+  outline: none;
+  margin-left: 16px;
+
+  svg {
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.25));
+  }
+
+  svg:hover {
+    filter: drop-shadow(0.5px 1px 1px rgba(0, 0, 0, 0.25));
+    color: #000;
+  }
+}
+
+.heartIcon {
+  color: #ee5555;
+}
+
+.iconBtn .heartIcon:hover {
+  color: #fa6666;
+}
