@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Links for Developers
+
+Typescript: https://www.typescriptlang.org/docs/home.html
+React: https://reactjs.org/docs/hello-world.html
+Icons: https://dev.materialdesignicons.com/icons
+Redux: https://redux.js.org/introduction/getting-started
+React Redux: https://react-redux.js.org/introduction/quick-start
+React Bootstrap: https://react-bootstrap.github.io/components
+
+
 ## Available Scripts
 
 In the project directory, you can run:
