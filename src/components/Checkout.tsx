@@ -1,6 +1,7 @@
 import React from 'react';
 import { Product } from '../redux/state';
 import { ReduxProps } from '../containers/CheckoutContainer';
+import styles from './Checkout.module.scss';
 
 export interface StateProps {
   products: {[productId: string]: Product};
@@ -18,7 +19,7 @@ class Checkout extends React.Component<ReduxProps, {}> {
     );
 
     return (
-      <div className="checkout">
+      <div className={styles.checkout}>
         <ul>
           {cartItems}
         </ul>
