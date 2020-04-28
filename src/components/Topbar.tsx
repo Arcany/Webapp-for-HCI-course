@@ -16,6 +16,7 @@ class Topbar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.toggleBtn} />
         <Navbar.Collapse id="basic-navbar-nav">
           <div className={styles.userActions}>
+            {/* TODO: Do something else with the favorite. */}
             <Link to="/checkout" className={styles.iconBtn}>
               <Icon path={mdiHeart} size={1.3} className={styles.heartIcon} />
             </Link>
