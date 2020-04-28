@@ -1,20 +1,19 @@
 import React from 'react';
-import { Product, ShoppingCartItem } from '../redux/state';
+import { Product } from '../redux/state';
 import { ReduxProps } from '../containers/CheckoutContainer';
 
-interface CartProduct extends Product {
-  cart: ShoppingCartItem
-}
-
 export interface StateProps {
-  items: {[productId: string]: CartProduct};
+  products: {[productId: string]: Product};
 }
 
 class Checkout extends React.Component<ReduxProps, {}> {
   render() {
-    const cartItems = Object.entries(this.props.items).map(([id, product]) =>
+    const cartItems = Object.entries(this.props.products).map(([id, product]) =>
       <li key={id}>
         {product.name} - {product.price}€
+        <button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</button>
+        {product.cart?.quantity ?? 0}
+        <button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</button>
       </li>
     );
 

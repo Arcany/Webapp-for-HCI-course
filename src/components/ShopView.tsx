@@ -11,6 +11,9 @@ class ShopView extends React.Component<ReduxProps, {}> {
     const products = Object.entries(this.props.products).map(([id, product]) =>
       <li key={id}>
         {product.name} - {product.price}€
+        <button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</button>
+        {product.cart?.quantity}
+        <button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</button>
       </li>
     );
 

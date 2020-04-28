@@ -4,10 +4,12 @@ import { connect, ConnectedProps } from "react-redux";
 import { setCartProductQuantity } from "../redux/actions";
 
 function mapStateToProps(state: ApplicationState): StateProps {
-  const res: StateProps = {items: {}};
+  const res: StateProps = {products: {}};
 
-  Object.entries(state.cart).forEach(([id, item]) => {
-    res.items[id] = Object.assign({}, state.products[id], {cart: item});
+  Object.entries(state.products).forEach(([id, item]) => {
+    if (item.cart) {
+      res.products[id] = item
+    }
   });
 
   return res;

@@ -6,13 +6,20 @@ import * as ActionTypes from './actionTypes';
 type Action = SetCartProductQuantityAction;
 
 function setCartProductQuantity(state: ApplicationState, action: SetCartProductQuantityAction): ApplicationState {
-  const newState: ApplicationState = {...state};
+  // const newState: ApplicationState = {...state};
   const quantity = Math.floor(action.quantity);
-  if (action.quantity <= 0) {
-    delete newState.cart[action.productId];
-  } else {
-    newState.cart[action.productId] = {
-      quantity
+
+  const newState = {
+    ...state,
+    products: {
+      ...state.products,
+      [action.productId]: {
+        ...state.products[action.productId],
+        cart: quantity > 0 ? {
+          ...state.products[action.productId].cart,
+          quantity
+        } : undefined
+      }
     }
   }
 

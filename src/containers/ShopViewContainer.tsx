@@ -4,9 +4,10 @@ import { setCartProductQuantity } from '../redux/actions';
 import { connect, ConnectedProps } from 'react-redux';
 
 function mapStateToProps(state: ApplicationState): StateProps {
-  return {
+  const res: StateProps = {
     products: state.products
   };
+  return res;
 }
 
 const mapDispatchToProps = {
