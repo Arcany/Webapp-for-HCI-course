@@ -15,8 +15,11 @@ class App extends React.Component {
           <Route path="/checkout">
             <Checkout />
           </Route>
-          <Route path="/">
+          <Route path={['/:primaryCategory/:subCategory', '/:primaryCategory', '/']}>
             <ShopView />
+          </Route>
+          <Route>
+            Unknown route.
           </Route>
         </Switch>
       </div>

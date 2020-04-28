@@ -2,6 +2,7 @@ import Checkout, { StateProps } from "../components/Checkout";
 import { ApplicationState } from "../redux/state";
 import { connect, ConnectedProps } from "react-redux";
 import { setCartProductQuantity } from "../redux/actions";
+import { withRouter } from "react-router-dom";
 
 function mapStateToProps(state: ApplicationState): StateProps {
   const res: StateProps = {products: {}};
@@ -23,6 +24,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export type ReduxProps = ConnectedProps<typeof connector>;
 
-const ConnectedCheckout = connector(Checkout);
+const ConnectedCheckout = withRouter(connector(Checkout));
 
 export default ConnectedCheckout;

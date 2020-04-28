@@ -1,52 +1,24 @@
 import React from "react";
-import { Product } from "../redux/state";
+import { ProductMap, CategoryMap } from "../redux/state";
 import { ReduxProps } from "../containers/ShopViewContainer";
 import Button from "react-bootstrap/Button";
 
 import styles from './ShopView.module.scss';
 import Icon from "@mdi/react";
-import { mdiChevronUp, mdiFormatSuperscript, mdiChevronDown } from "@mdi/js";
+import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
+import { RouteComponentProps, NavLink } from "react-router-dom";
 
 export interface StateProps {
-  products: {[productId: string]: Product};
+  products: ProductMap;
+  categories: CategoryMap
 }
 
-interface Category {
-  subCategories: string[] | null;
+interface RouteProps {
+  primaryCategory?: string;
+  subCategory?: string;
 }
 
-const categories: {[catName: string]: Category} = {
-  'Fruits and vegetables': {
-    subCategories: ['Fruits', 'Vegetables']
-  },
-  'Milk': {
-    subCategories: ['Drinking milk', 'Yogurt', 'Cheese']
-  },
-  'Bread': {
-    subCategories: ['White bread', 'Normal Bread']
-  },
-  'Meat': {
-    subCategories: ['Processed', 'Raw']
-  },
-  'Grains': {
-    subCategories: null
-  }
-}
-
-interface State {
-  primaryCategory: string|null;
-  subCategory: string|null;
-}
-
-class ShopView extends React.Component<ReduxProps, State> {
-  constructor(props: ReduxProps) {
-    super(props);
-    this.state = {
-      primaryCategory: null,
-      subCategory: null
-    };
-  }
-
+class ShopView extends React.Component<ReduxProps & RouteComponentProps<RouteProps>, {}> {
   render() {
     const products = Object.entries(this.props.products).map(([id, product]) =>
       <li key={id}>
@@ -57,26 +29,26 @@ class ShopView extends React.Component<ReduxProps, State> {
       </li>
     );
 
-    const sidebarItems = Object.entries(categories).map(([name, category]) => {
-      const isActive = name === this.state.primaryCategory;
+    const sidebarItems = Object.entries(this.props.categories).map(([name, category]) => {
+      const isActive = name === this.props.match.params.primaryCategory;
+      const activeSub = this.props.match.params.subCategory;
       const hasSubs = !!category.subCategories;
 
       return (
-        <div className={`${styles.primaryCategory} ${hasSubs ? '' : styles.noSubcategories}`}>
-          <div className={`${styles.header} ${isActive ? styles.activeHeader : ''}`}
-              onClick={() => this.setState({primaryCategory: name})}>
+        <div className={`${styles.primaryCategory} ${hasSubs ? '' : styles.noSubcategories}`} key={name}>
+          <NavLink to={`/${name}`} className={styles.header} activeClassName={styles.activeHeader}>
             <span>{name}</span>
             {hasSubs && (
               isActive ? <Icon path={mdiChevronDown} size={1} /> : <Icon path={mdiChevronUp} size={1} />)}
-          </div>
-          {this.state.primaryCategory === name &&
-            <ul>
+          </NavLink>
+          {isActive &&
+            <div className={styles.subCatList}>
               {category.subCategories?.map((sub) =>
-                <li onClick={() => this.setState({subCategory: sub})} className={this.state.subCategory === sub ? styles.activeSub : ''}>
+                <NavLink to={`/${name}/${sub}`} activeClassName={styles.activeSub} key={sub}>
                   {sub}
-                </li>
+                </NavLink>
               )}
-            </ul>
+            </div>
           }
         </div>
       );
