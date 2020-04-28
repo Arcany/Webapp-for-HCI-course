@@ -13,7 +13,7 @@ class ShopView extends React.Component<ReduxProps, {}> {
       <li key={id}>
         {product.name} - {product.price}€
         <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</Button>
-        {product.cart?.quantity ? product.cart.quantity : 0}
+        {product.cart?.quantity ?? 0}
         <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</Button>
       </li>
     );
