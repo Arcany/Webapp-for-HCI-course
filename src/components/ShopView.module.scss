@@ -82,4 +82,18 @@
 .productArea {
   flex-grow: 1;
   margin: 8px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.productCard {
+  margin: 12px;
+  box-shadow: 2px 2px 4px $shadow-light;
+}
+
+.productCard:hover {
+  box-shadow: 4px 4px 4px $shadow-light;
 }

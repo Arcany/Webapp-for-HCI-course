@@ -2,6 +2,7 @@ import React from "react";
 import { ProductMap, CategoryMap } from "../redux/state";
 import { ReduxProps } from "../containers/ShopViewContainer";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 import styles from './ShopView.module.scss';
 import Icon from "@mdi/react";
@@ -20,14 +21,14 @@ interface RouteProps {
 
 class ShopView extends React.Component<ReduxProps & RouteComponentProps<RouteProps>, {}> {
   render() {
-    const products = Object.entries(this.props.products).map(([id, product]) =>
-      <li key={id}>
-        {product.name} - {product.price}€
-        <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</Button>
-        {product.cart?.quantity ?? 0}
-        <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</Button>
-      </li>
-    );
+    // const products = Object.entries(this.props.products).map(([id, product]) =>
+    //   <li key={id}>
+    //     {product.name} - {product.price}€
+    //     <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</Button>
+    //     {product.cart?.quantity ?? 0}
+    //     <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</Button>
+    //   </li>
+    // );
 
     const sidebarItems = Object.entries(this.props.categories).map(([name, category]) => {
       const isActive = name === this.props.match.params.primaryCategory;
@@ -54,14 +55,25 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
       );
     });
 
+    const productCards = Object.entries(this.props.products).map(([id, product]) =>
+      <Card key={id} className={styles.productCard}>
+        <Card.Body>
+          <Card.Title>{product.name}</Card.Title>
+          <Card.Text>{product.price}€</Card.Text>
+          <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</Button>
+          {product.cart?.quantity ?? 0}
+          <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</Button>
+        </Card.Body>
+      </Card>
+    )
+
     return (
       <div className={styles.container}>
         <div className={styles.sidebar}>
           {sidebarItems}
         </div>
         <div className={styles.productArea}>
-          {/* {products} */}
-          Container
+          {productCards}
         </div>
       </div>
     );
