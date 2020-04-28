@@ -1,10 +1,28 @@
 import React from 'react';
+import { Product, ShoppingCartItem } from '../redux/state';
+import { ReduxProps } from '../containers/CheckoutContainer';
 
-class Checkout extends React.Component {
+interface CartProduct extends Product {
+  cart: ShoppingCartItem
+}
+
+export interface StateProps {
+  items: {[productId: string]: CartProduct};
+}
+
+class Checkout extends React.Component<ReduxProps, {}> {
   render() {
+    const cartItems = Object.entries(this.props.items).map(([id, product]) =>
+      <li key={id}>
+        {product.name} - {product.price}€
+      </li>
+    );
+
     return (
       <div className="checkout">
-        Cart contents go here.
+        <ul>
+          {cartItems}
+        </ul>
       </div>
     )
   }

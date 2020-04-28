@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Switch, Route, Link } from 'react-router-dom';
-import ShopView from './components/ShopView';
-import Checkout from './components/Checkout';
+import ShopView from './containers/ShopViewContainer';
+import Checkout from './containers/CheckoutContainer';
 
 class App extends React.Component {
   render() {
