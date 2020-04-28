@@ -1,7 +1,18 @@
 @import "~bootstrap/scss/bootstrap";
+@import 'vars';
+
+body {
+  background-color: $backgroundColor;
+  min-height: 100vh;
+}
+
+#root, .App {
+  min-height: 100vh;
+}
 
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 Button {

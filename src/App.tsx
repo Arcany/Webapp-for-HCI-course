@@ -11,21 +11,6 @@ class App extends React.Component {
       <div className="App">
         <Topbar />
 
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">
-                Main View
-              </Link>
-            </li>
-            <li>
-              <Link to="/checkout">
-                Checkout
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
         <Switch>
           <Route path="/checkout">
             <Checkout />
