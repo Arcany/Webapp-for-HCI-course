@@ -2,12 +2,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Links for Developers
 
-Typescript: https://www.typescriptlang.org/docs/home.html
-React: https://reactjs.org/docs/hello-world.html
-Icons: https://dev.materialdesignicons.com/icons
-Redux: https://redux.js.org/introduction/getting-started
-React Redux: https://react-redux.js.org/introduction/quick-start
-React Bootstrap: https://react-bootstrap.github.io/components
+Typescript: https://www.typescriptlang.org/docs/home.html<br />
+React: https://reactjs.org/docs/hello-world.html<br />
+Icons: https://dev.materialdesignicons.com/icons<br />
+Redux: https://redux.js.org/introduction/getting-started<br />
+React Redux: https://react-redux.js.org/introduction/quick-start<br />
+React Bootstrap: https://react-bootstrap.github.io/components<br />
 
 
 ## Available Scripts
