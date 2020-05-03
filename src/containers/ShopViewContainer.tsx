@@ -1,6 +1,6 @@
 import ShopView, { StateProps } from '../components/ShopView';
 import { ApplicationState } from '../redux/state';
-import { setCartProductQuantity } from '../redux/actions';
+import { setCartProductQuantity, toggleProductFavorite } from '../redux/actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -13,7 +13,8 @@ function mapStateToProps(state: ApplicationState): StateProps {
 }
 
 const mapDispatchToProps = {
-  setCartProductQuantity
+  setCartProductQuantity,
+  toggleProductFavorite
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

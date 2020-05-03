@@ -18,3 +18,31 @@ body {
 Button {
   margin: 6px;
 }
+
+button.cartButton {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0 4px;
+  margin: 0;
+}
+
+button.cartButton:active {
+  position: relative;
+  top: 1px;
+  left: 1px;
+}
+
+svg.favIcon {
+  path {
+    fill: none !important;
+    stroke: black;
+  }
+}
+
+svg.favIcon.active {
+  path {
+    fill: #ee5555 !important;
+    stroke: none;
+  }
+}

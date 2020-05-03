@@ -8,7 +8,7 @@ function mapStateToProps(state: ApplicationState): StateProps {
   const res: StateProps = {products: {}};
 
   Object.entries(state.products).forEach(([id, item]) => {
-    if (item.cart) {
+    if ((item.cartAmount ?? 0) > 0) {
       res.products[id] = item
     }
   });

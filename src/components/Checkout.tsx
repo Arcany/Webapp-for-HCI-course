@@ -12,9 +12,9 @@ class Checkout extends React.Component<ReduxProps, {}> {
     const cartItems = Object.entries(this.props.products).map(([id, product]) =>
       <li key={id}>
         {product.name} - {product.price}€
-        <button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</button>
-        {product.cart?.quantity ?? 0}
-        <button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</button>
+        <button onClick={() => this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) - 1)}>-</button>
+        {product.cartAmount ?? 0}
+        <button onClick={() => this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) + 1)}>+</button>
       </li>
     );
 

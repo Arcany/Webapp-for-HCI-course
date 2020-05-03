@@ -1,11 +1,18 @@
-export interface ShoppingCartInfo {
-  quantity: number;
+export enum PriceType {
+  PER_KILO,
+  PER_UNIT
 }
 
 export interface Product {
   name: string;
-  price: number;
-  cart?: ShoppingCartInfo;
+  imgPath?: string;
+  priceType: PriceType;
+
+  price?: number;
+  priceKg?: number;
+
+  cartAmount?: number;
+  isFavorite?: boolean;
 }
 
 export interface Category {
@@ -24,12 +31,27 @@ export const defaultState: ApplicationState = {
   products: {
     'apple': {
       name: 'Apple',
-      price: 1.15,
-      cart: { quantity: 2 }
+      priceType: PriceType.PER_KILO,
+      priceKg: 1.15,
+      cartAmount: 2,
+      imgPath: 'fruits/apple.jpg',
+      isFavorite: true
     },
-    'pear': { name: 'Pear', price: 1.22, cart: { quantity: 1 } },
-    'cherry': { name: 'Cherry', price: 2.99 }
+    'pear': {
+      name: 'Pear',
+      priceType: PriceType.PER_KILO,
+      priceKg: 1.22,
+      cartAmount: 1,
+      imgPath: 'fruits/pear.jpg'
+    },
+    'cherry': {
+      name: 'Cherry',
+      priceType: PriceType.PER_KILO,
+      priceKg: 2.99,
+      imgPath: 'fruits/cherry.jpg'
+    }
   },
+
   categories: {
     'Fruits and vegetables': {
       subCategories: ['Fruits', 'Vegetables']
