@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 
 const store = createStore(
   updateState,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
 

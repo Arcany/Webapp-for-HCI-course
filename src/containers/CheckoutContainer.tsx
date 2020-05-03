@@ -1,15 +1,15 @@
-import Checkout, { StateProps } from "../components/Checkout";
-import { ApplicationState } from "../redux/state";
-import { connect, ConnectedProps } from "react-redux";
-import { setCartProductQuantity } from "../redux/actions";
-import { withRouter } from "react-router-dom";
+import Checkout, { StateProps } from '../components/Checkout';
+import { ApplicationState } from '../redux/state';
+import { connect, ConnectedProps } from 'react-redux';
+import { setCartProductQuantity } from '../redux/actions';
+import { withRouter } from 'react-router-dom';
 
 function mapStateToProps(state: ApplicationState): StateProps {
   const res: StateProps = {products: {}};
 
   Object.entries(state.products).forEach(([id, item]) => {
     if ((item.cartAmount ?? 0) > 0) {
-      res.products[id] = item
+      res.products[id] = item;
     }
   });
 
@@ -18,7 +18,7 @@ function mapStateToProps(state: ApplicationState): StateProps {
 
 const mapDispatchToProps = {
   setCartProductQuantity
-}
+};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

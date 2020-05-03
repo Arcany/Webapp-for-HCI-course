@@ -15,7 +15,7 @@ function mapStateToProps(state: ApplicationState): StateProps {
 const mapDispatchToProps = {
   setCartProductQuantity,
   toggleProductFavorite
-}
+};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

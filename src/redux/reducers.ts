@@ -1,5 +1,5 @@
-import { ApplicationState, defaultState } from "./state";
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction } from "./actions";
+import { ApplicationState, defaultState } from './state';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
@@ -18,7 +18,7 @@ function setCartProductQuantity(state: ApplicationState, action: SetCartProductQ
         cartAmount: quantity
       }
     }
-  }
+  };
 }
 
 function toggleProductFavorite(state: ApplicationState, action: ToggleProductFavoriteAction): ApplicationState {
@@ -31,7 +31,7 @@ function toggleProductFavorite(state: ApplicationState, action: ToggleProductFav
         isFavorite: !state.products[action.productId].isFavorite
       }
     }
-  }
+  };
 }
 
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
@@ -43,6 +43,6 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
     default:
       return state;
   }
-}
+};
 
 export default updateState;

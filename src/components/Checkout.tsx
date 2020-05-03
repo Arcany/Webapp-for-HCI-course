@@ -24,7 +24,7 @@ class Checkout extends React.Component<ReduxProps, {}> {
           {cartItems}
         </ul>
       </div>
-    )
+    );
   }
 }
 

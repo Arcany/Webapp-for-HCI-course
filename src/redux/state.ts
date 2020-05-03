@@ -69,4 +69,4 @@ export const defaultState: ApplicationState = {
       subCategories: null
     }
   }
-}
+};

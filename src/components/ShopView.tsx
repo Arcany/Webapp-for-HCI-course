@@ -1,18 +1,18 @@
-import React from "react";
-import { ProductMap, CategoryMap, PriceType } from "../redux/state";
-import { ReduxProps } from "../containers/ShopViewContainer";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import FormControl from "react-bootstrap/FormControl";
+import React from 'react';
+import { ProductMap, CategoryMap, PriceType } from '../redux/state';
+import { ReduxProps } from '../containers/ShopViewContainer';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import FormControl from 'react-bootstrap/FormControl';
 
 import styles from './ShopView.module.scss';
-import Icon from "@mdi/react";
-import { mdiChevronUp, mdiChevronDown, mdiCartPlus, mdiCartMinus, mdiHeart } from "@mdi/js";
-import { RouteComponentProps, NavLink } from "react-router-dom";
+import Icon from '@mdi/react';
+import { mdiChevronUp, mdiChevronDown, mdiCartPlus, mdiCartMinus, mdiHeart } from '@mdi/js';
+import { RouteComponentProps, NavLink } from 'react-router-dom';
 
 export interface StateProps {
   products: ProductMap;
-  categories: CategoryMap
+  categories: CategoryMap;
 }
 
 interface RouteProps {
@@ -101,7 +101,7 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
       );
     }
 
-    )
+    );
 
     return (
       <div className={styles.container}>

@@ -1,13 +1,13 @@
-import * as ActionTypes from './actionTypes'
+import * as ActionTypes from './actionTypes';
 
 export interface SetCartProductQuantityAction {
-  type: ActionTypes.SET_CART_PRODUCT_QUANTITY,
+  type: ActionTypes.SET_CART_PRODUCT_QUANTITY;
   productId: string;
   quantity: number;
 }
 
 export interface ToggleProductFavoriteAction {
-  type: ActionTypes.TOGGLE_PRODUCT_FAVORITE,
+  type: ActionTypes.TOGGLE_PRODUCT_FAVORITE;
   productId: string;
 }
 
