@@ -42,7 +42,7 @@ svg.favIcon {
 
 svg.favIcon.active {
   path {
-    fill: #ee5555 !important;
+    fill: $favoriteColor !important;
     stroke: none;
   }
 }

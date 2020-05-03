@@ -37,9 +37,9 @@
 }
 
 .heartIcon {
-  color: #ee5555;
+  color: $favoriteColor;
 }
 
 .iconBtn .heartIcon:hover {
-  color: #fa6666;
+  color: $favoriteHighlightColor;
 }
