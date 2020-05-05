@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from '../redux/state';
 import { ReduxProps } from '../containers/CheckoutContainer';
 import styles from './Checkout.module.scss';
+import { Link } from 'react-router-dom';
 
 export interface StateProps {
   products: {[productId: string]: Product};
@@ -23,6 +24,8 @@ class Checkout extends React.Component<ReduxProps, {}> {
         <ul>
           {cartItems}
         </ul>
+
+        <Link to="/shipping">Shipping</Link>
       </div>
     );
   }
