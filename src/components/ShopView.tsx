@@ -22,15 +22,6 @@ interface RouteProps {
 
 class ShopView extends React.Component<ReduxProps & RouteComponentProps<RouteProps>, {}> {
   render() {
-    // const products = Object.entries(this.props.products).map(([id, product]) =>
-    //   <li key={id}>
-    //     {product.name} - {product.price}€
-    //     <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) - 1)}>-</Button>
-    //     {product.cart?.quantity ?? 0}
-    //     <Button onClick={() => this.props.setCartProductQuantity(id, (product.cart?.quantity ?? 0) + 1)}>+</Button>
-    //   </li>
-    // );
-
     const sidebarItems = Object.entries(this.props.categories).map(([name, category]) => {
       const isActive = name === this.props.match.params.primaryCategory;
       const hasSubs = !!category.subCategories;
