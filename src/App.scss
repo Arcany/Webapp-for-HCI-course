@@ -9,7 +9,13 @@ body {
 #root, .App {
   min-height: 100vh;
 }
-
+h1{
+  text-align: center;
+  padding: 50px;
+}
+Link{
+  color: #fefefe;
+}
 .App {
   display: flex;
   flex-direction: column;
@@ -46,3 +52,4 @@ svg.favIcon.active {
     stroke: none;
   }
 }
+
