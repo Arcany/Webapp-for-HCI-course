@@ -1,6 +1,6 @@
 import React from 'react';
 import {ReduxProps} from '../containers/ShippingContainer';
-import {Button, Col, Form} from "react-bootstrap";
+import {Button, Col, Form} from 'react-bootstrap';
 
 class Shipping extends React.Component<ReduxProps, {}> {
     render() {
