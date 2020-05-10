@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductMap, CategoryMap, PriceType } from '../redux/state';
+import { ProductMap, CategoryMap, ProductType } from '../redux/state';
 import { ReduxProps } from '../containers/ShopViewContainer';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -9,6 +9,7 @@ import styles from './ShopView.module.scss';
 import Icon from '@mdi/react';
 import { mdiChevronUp, mdiChevronDown, mdiCartPlus, mdiCartMinus, mdiHeart } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
+import UnitProductCard from './products/UnitProductCard';
 
 export interface StateProps {
   products: ProductMap;
@@ -60,52 +61,12 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
       }
       return true;
     }).map(([id, product]) => {
-      let priceComponent;
-      switch(product.priceType) {
-        case PriceType.PER_KILO:
-          priceComponent = (<div className={styles.productPrice}>
-            <span className={styles.productPriceNr}>{product.priceKg}</span>
-            <span className={styles.productPriceLabel}>€/kg</span>
-          </div>);
-          break;
-        case PriceType.PER_UNIT:
-          priceComponent = (
-            <Card.Text className={styles.productPrice}>{product.price}€</Card.Text>
-          );
-          break;
-        case PriceType.PER_LITRE:
-          priceComponent = (<div className={styles.productPrice}>
-            <span className={styles.productPriceNr}>{product.priceL}</span>
-            <span className={styles.productPriceLabel}>€/L</span>
-          </div>);
-          break;
+      switch (product.type) {
+        case ProductType.UNIT:
+          return <UnitProductCard product={product} productId={id} toggleProductFavorite={this.props.toggleProductFavorite}
+              setCartProductQuantity={this.props.setCartProductQuantity} key={id} />;
       }
-
-      return (
-        <Card key={id} className={styles.productCard}>
-          {product.imgPath &&
-            <Card.Img variant="top" src={`/products/${product.imgPath}`} />
-          }
-          <Card.Body className={styles.productBody}>
-            <Card.Title className={styles.productTitle}>{product.name}</Card.Title>
-
-            <div className={styles.productFooter}>
-              {priceComponent}
-              <button className="cartButton" onClick={() => this.props.toggleProductFavorite(id)}>
-                <Icon className={`favIcon ${product.isFavorite ? 'active' : ''}`} path={mdiHeart} size={1.2} />
-              </button>
-              <button className="cartButton" onClick={() => this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) - 1)}>
-                <Icon path={mdiCartMinus} size={1.2} />
-              </button>
-              <FormControl className={styles.cartAmount} size="sm" value={product.cartAmount ?? 0}
-                onChange={(e) => this.props.setCartProductQuantity(id, (parseInt(e.target.value) || 0))} />
-              <button className="cartButton" onClick={() => this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) + 1)}>
-                <Icon path={mdiCartPlus} size={1.2} />
-              </button>
-            </div>
-          </Card.Body>
-        </Card>
-      );
+      return null;
     });
 
     return (

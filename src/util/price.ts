@@ -1,24 +1,24 @@
-import { Product, ProductMap, PriceType } from '../redux/state';
+import { ProductMap, Product, ProductType } from '../redux/state';
 
 export function cartItemPrice(product: Product): string {
-  if (product.cartAmount) {
-    if (product.priceKg) return (product.priceKg * product.cartAmount).toFixed(2);
-    if (product.price) return (product.price * product.cartAmount).toFixed(2);
-    if (product.priceL) return (product.priceL * product.cartAmount).toFixed(2);
-  } return (0).toFixed(2);
+  switch (product.type) {
+    case ProductType.UNIT:
+      return (product.unitPrice * (product.cartAmount ?? 0)).toFixed(2);
+    case ProductType.MASS:
+      return (product.massPrice * (product.cartAmount ?? 0) * product.massIncrement).toFixed(2);
+  }
+  console.warn('Reached end of cartItemPrice.');
+  return '0.00';
 }
 
 export function productPrice(product: Product): number {
-  if (product.cartAmount) {
-    switch (product.priceType) {
-      case PriceType.PER_KILO:
-        return (product.priceKg ?? 0) * product.cartAmount;
-      case PriceType.PER_LITRE:
-        return (product.priceL ?? 0) * product.cartAmount;
-      case PriceType.PER_UNIT:
-        return (product.price ?? 0) * product.cartAmount;
-    }
+  switch (product.type) {
+    case ProductType.UNIT:
+      return (product.unitPrice * (product.cartAmount ?? 0));
+    case ProductType.MASS:
+      return (product.massPrice * (product.cartAmount ?? 0) * product.massIncrement);
   }
+  console.warn('Reached end of productPrice.');
   return 0;
 }
 

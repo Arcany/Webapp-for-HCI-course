@@ -1,22 +1,32 @@
-export enum PriceType {
-  PER_KILO,
-  PER_UNIT,
-  PER_LITRE
+export enum ProductType {
+  UNIT = 'UNIT', MASS = 'MASS'
 }
 
-export interface Product {
+export interface BaseProduct {
   name: string;
   imgPath?: string;
-  priceType: PriceType;
   categories: {primary: string; sub?: string}[];
-
-  price?: number;
-  priceKg?: number;
-  priceL?: number;
+  origin?: string;
 
   cartAmount?: number;
   isFavorite?: boolean;
 }
+
+export interface ProductUnit extends BaseProduct {
+  type: ProductType.UNIT;
+  unitPrice: number;
+  massLabel?: string;
+  unitMass: number;
+}
+
+export interface ProductMass extends BaseProduct {
+  type: ProductType.MASS;
+  massLabel?: string;
+  massIncrement: number;
+  massPrice: number;
+}
+
+export type Product = ProductUnit|ProductMass;
 
 export interface Category {
   subCategories: string[] | null;
@@ -50,12 +60,19 @@ const Cat = {
   }
 };
 
+const Mass = {
+  KG: 'kg',
+  L: 'l'
+};
+
 export const defaultState: ApplicationState = {
   products: {
     'apple': {
       name: 'Apple',
-      priceType: PriceType.PER_KILO,
-      priceKg: 1.15,
+      origin: 'Estonia',
+      type: ProductType.UNIT,
+      unitPrice: 0.45,
+      unitMass: 0.25,
       cartAmount: 2,
       imgPath: 'fruits/apple.jpg',
       isFavorite: true,
@@ -65,8 +82,10 @@ export const defaultState: ApplicationState = {
     },
     'pear': {
       name: 'Pear',
-      priceType: PriceType.PER_KILO,
-      priceKg: 1.22,
+      origin: 'Latvia',
+      type: ProductType.UNIT,
+      unitPrice: 0.32,
+      unitMass: 0.2,
       cartAmount: 1,
       imgPath: 'fruits/pear.jpg',
       categories: [
@@ -75,8 +94,10 @@ export const defaultState: ApplicationState = {
     },
     'cherry': {
       name: 'Cherry',
-      priceType: PriceType.PER_KILO,
-      priceKg: 2.99,
+      type: ProductType.MASS,
+      massIncrement: 0.1,
+      massLabel: Mass.KG,
+      massPrice: 3.99,
       imgPath: 'fruits/cherry.jpg',
       categories: [
         { primary: Cat.FruitsAndVegetables, sub: Cat.Sub.Fruits }
@@ -84,8 +105,10 @@ export const defaultState: ApplicationState = {
     },
     'milk': {
       name: 'Milk',
-      priceType: PriceType.PER_LITRE,
-      priceL: 0.50,
+      type: ProductType.UNIT,
+      unitPrice: 0.99,
+      massLabel: Mass.L,
+      unitMass: 1,
       imgPath: 'dairy/milk.jpg',
       categories: [
         { primary: Cat.Milk, sub: Cat.Sub.DrinkingMilk }
@@ -93,8 +116,10 @@ export const defaultState: ApplicationState = {
     },
     'yogurt': {
       name: 'Yogurt',
-      priceType: PriceType.PER_KILO,
-      priceKg: 0.50,
+      type: ProductType.UNIT,
+      unitPrice: 0.95,
+      massLabel: Mass.L,
+      unitMass: 0.5,
       imgPath: 'dairy/yogurt.jpg',
       categories: [
         { primary: Cat.Milk, sub: Cat.Sub.Yogurt }
@@ -102,8 +127,9 @@ export const defaultState: ApplicationState = {
     },
     'cheese': {
       name: 'Cheese',
-      priceType: PriceType.PER_KILO,
-      priceKg: 5.00,
+      type: ProductType.UNIT,
+      unitPrice: 1.15,
+      unitMass: 0.4,
       imgPath: 'dairy/cheese.jpg',
       categories: [
         { primary: Cat.Milk, sub: Cat.Sub.Cheese }
@@ -111,8 +137,9 @@ export const defaultState: ApplicationState = {
     },
     'carrot': {
       name: 'Carrot',
-      priceType: PriceType.PER_KILO,
-      priceKg: 0.69,
+      type: ProductType.UNIT,
+      unitMass: 0.3,
+      unitPrice: 0.23,
       imgPath: 'vegetables/carrot.jpg',
       categories: [
         { primary: Cat.FruitsAndVegetables, sub: Cat.Sub.Vegetables }
@@ -120,8 +147,9 @@ export const defaultState: ApplicationState = {
     },
     'wbread': {
       name: 'White Bread',
-      priceType: PriceType.PER_KILO,
-      priceKg: 0.80,
+      type: ProductType.UNIT,
+      unitMass: 0.5,
+      unitPrice: 0.74,
       imgPath: 'bread/wbread.jpg',
       categories: [
         { primary: Cat.Bread, sub: Cat.Sub.WBread }
@@ -129,8 +157,9 @@ export const defaultState: ApplicationState = {
     },
     'rbread': {
       name: 'Regular Bread',
-      priceType: PriceType.PER_KILO,
-      priceKg: 0.80,
+      type: ProductType.UNIT,
+      unitMass: 0.4,
+      unitPrice: 0.89,
       imgPath: 'bread/rbread.jpg',
       categories: [
         { primary: Cat.Bread, sub: Cat.Sub.RBread }
@@ -138,8 +167,9 @@ export const defaultState: ApplicationState = {
     },
     'sausages': {
       name: 'Sausages',
-      priceType: PriceType.PER_KILO,
-      priceKg: 4.20,
+      type: ProductType.UNIT,
+      unitMass: 0.5,
+      unitPrice: 3.39,
       imgPath: 'meats/sausages.jpg',
       categories: [
         { primary: Cat.Meat, sub: Cat.Sub.ProcessedMeat }
@@ -147,8 +177,9 @@ export const defaultState: ApplicationState = {
     },
     'rawbeef': {
       name: 'Raw Beef',
-      priceType: PriceType.PER_KILO,
-      priceKg: 12.99,
+      type: ProductType.UNIT,
+      unitMass: 0.5,
+      unitPrice: 4.49,
       imgPath: 'meats/rawbeef.jpg',
       categories: [
         { primary: Cat.Meat, sub: Cat.Sub.RawMeat }
@@ -156,8 +187,9 @@ export const defaultState: ApplicationState = {
     },
     'buckwheat': {
       name: 'Buckwheat',
-      priceType: PriceType.PER_KILO,
-      priceKg: 2.10,
+      type: ProductType.UNIT,
+      unitMass: 1,
+      unitPrice: 2.29,
       imgPath: 'grains/buckwheat.jpg',
       categories: [
         { primary: Cat.Grains }

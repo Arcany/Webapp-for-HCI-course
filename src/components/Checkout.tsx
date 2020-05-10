@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product, ProductMap } from '../redux/state';
+import { BaseProduct, ProductMap, Product } from '../redux/state';
 import { ReduxProps } from '../containers/CheckoutContainer';
 import styles from './Checkout.module.scss';
 import { Link } from 'react-router-dom';

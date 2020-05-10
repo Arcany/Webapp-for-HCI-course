@@ -1,0 +1,32 @@
+.productPrice {
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  font-size: 16px;
+
+  .priceMain {
+    // font-size: 34px;
+    // line-height: 34px;
+    font-size: 2em;
+    line-height: 1em;
+  }
+
+  .priceCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2px;
+  }
+
+  .priceSecondary {
+    font-size: 1em;
+    line-height: 1em;
+  }
+
+  .priceLabel {
+    font-size: 0.75em;
+    line-height: 1em;
+    // color: $subTextColor;
+    font-weight: 600;
+  }
+}

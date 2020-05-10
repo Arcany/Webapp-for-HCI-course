@@ -1,0 +1,29 @@
+.priceRoot {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  .main {
+    font-size: 2em;
+    font-weight: 600;
+    line-height: 1em;
+  }
+
+  .sub {
+    align-self: flex-start;
+    font-size: 1em;
+  }
+
+  .separator {
+    font-size: 1.8em;
+    line-height: 1em;
+  }
+
+  .label {
+    font-size: 1em;
+    line-height: 1em;
+
+    margin-bottom: 4px;
+  }
+}

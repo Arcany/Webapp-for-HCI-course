@@ -1,10 +1,10 @@
 import React from 'react';
-import { Product } from '../redux/state';
+import { BaseProduct } from '../redux/state';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 type ModalProps = {
-	productProp: Product;
+	productProp: BaseProduct;
 	onClose: Function;
 	show: boolean;
 }
@@ -13,7 +13,7 @@ class CheckoutModal extends React.Component<ModalProps, {}> {
 	render () {
 		const handleClose = (value: boolean) => {
 			this.props.onClose(value);
-		};	
+		};
 
 		return (
 			<Modal show={this.props.show} onHide={handleClose} animation={false}>

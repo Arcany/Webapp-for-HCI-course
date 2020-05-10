@@ -1,0 +1,82 @@
+.productCard {
+  margin: 12px;
+  box-shadow: 2px 2px 4px $shadow-light;
+  min-height: 290px;
+
+  img {
+    width: 260px;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .productBody {
+    padding: 6px 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .productName {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 0px;
+    margin-top: 2px;
+  }
+
+  .productSubtitleRow {
+    display: flex;
+    color: $subTextColor;
+    font-size: 14px;
+    margin-top: 0;
+
+    .productUnitWeight {
+      flex-grow: 1;
+    }
+  }
+
+  .productFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    flex-grow: 1;
+  }
+
+  .productPriceCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 6px;
+
+    .productSubPrice {
+      font-size: 14px;
+      color: $subTextColor;
+      line-height: 15px;
+    }
+  }
+
+  .productActions {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 4px;
+
+    .cartAmount {
+      padding: 4px;
+      width: 36px;
+      text-align: center;
+    }
+  }
+
+  .productActionsCol {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 8px;
+  }
+}
+
+.productCard:hover {
+  box-shadow: 4px 4px 4px $shadow-light;
+}

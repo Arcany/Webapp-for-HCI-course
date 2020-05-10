@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import 'vars';
+@import 'Products';
 
 body {
   background-color: $backgroundColor;
@@ -9,24 +10,29 @@ body {
 #root, .App {
   min-height: 100vh;
 }
-h1{
+
+h1 {
   text-align: center;
   padding: 50px;
 }
-#andmed{
+
+#andmed {
   width: 500px;
   height: 100px;
   text-align: center;
   margin: auto;
 }
 
-#nupud{
+#nupud {
   padding-top: 20px;
   text-align: center;
-  margin: auto;}
-Link{
+  margin: auto;
+}
+
+Link {
   color: #fefefe;
 }
+
 .App {
   display: flex;
   flex-direction: column;
@@ -74,4 +80,3 @@ svg.favIcon.active {
     stroke: none;
   }
 }
-
