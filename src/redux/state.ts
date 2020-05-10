@@ -38,6 +38,7 @@ export type ProductMap = {[productId: string]: Product};
 export interface ApplicationState {
   products: ProductMap;
   categories: CategoryMap;
+  originFilters: string[];
 }
 
 const Cat = {
@@ -213,5 +214,7 @@ export const defaultState: ApplicationState = {
     [Cat.Grains]: {
       subCategories: null
     }
-  }
+  },
+
+  originFilters: []
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { ProductMap, CategoryMap, ProductType } from '../redux/state';
 import { ReduxProps } from '../containers/ShopViewContainer';
 import Button from 'react-bootstrap/Button';
@@ -11,10 +11,13 @@ import { mdiChevronUp, mdiChevronDown, mdiCartPlus, mdiCartMinus, mdiHeart } fro
 import { RouteComponentProps, NavLink } from 'react-router-dom';
 import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
+import { Form } from 'react-bootstrap';
 
 export interface StateProps {
   products: ProductMap;
   categories: CategoryMap;
+  originFilters: string[];
+  origins: Set<string>;
 }
 
 interface RouteProps {
@@ -61,6 +64,16 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
         return false;
       }
       return true;
+    }).filter(([id, product]) => {
+      if (this.props.originFilters.length === 0) {
+        return true;
+      }
+      if (!product.origin) {
+        return false;
+      }
+      if (this.props.originFilters.includes(product.origin)) {
+        return true;
+      }
     }).map(([id, product]) => {
       switch (product.type) {
       case ProductType.UNIT:
@@ -83,8 +96,29 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
           </div>
           {sidebarItems}
         </div>
-        <div className={styles.productArea}>
-          {productCards}
+        <div className={styles.primaryContainer}>
+          <div className={styles.filterContainer}>
+            <span className={styles.tempHeader}>Origin:</span>
+            <div className={styles.toggleList}>
+              {Array.from(this.props.origins).map(origin => (
+                <Form.Group controlId={origin} className={styles.formGroup} key={origin}>
+                  <Form.Check label={origin} type="checkbox" checked={this.props.originFilters.includes(origin)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      if (e.target.checked) {
+                        this.props.addOriginFilter(origin);
+                      } else {
+                        this.props.RemoveOriginFilter(origin);
+                      }
+                    }}
+                  />
+                </Form.Group>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.productArea}>
+            {productCards}
+          </div>
         </div>
       </div>
     );
