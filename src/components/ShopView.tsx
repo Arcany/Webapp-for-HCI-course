@@ -46,7 +46,20 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
       );
     });
 
-    const productCards = Object.entries(this.props.products).map(([id, product]) => {
+    const productCards = Object.entries(this.props.products).filter(([id, product]) => {
+      const primary = this.props.match.params.primaryCategory;
+      const sub = this.props.match.params.subCategory;
+      if (sub) {
+        if (product.categories.find(v => v.primary === primary && v.sub === sub)) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (primary && !product.categories.find(v => v.primary === primary)) {
+        return false;
+      }
+      return true;
+    }).map(([id, product]) => {
       let priceComponent;
       switch(product.priceType) {
         case PriceType.PER_KILO:
@@ -93,9 +106,7 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
           </Card.Body>
         </Card>
       );
-    }
-
-    );
+    });
 
     return (
       <div className={styles.container}>
