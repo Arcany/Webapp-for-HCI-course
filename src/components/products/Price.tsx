@@ -15,7 +15,7 @@ export default class Price extends React.Component<Props, {}> {
           <span className={styles.priceSecondary}>
             {((this.props.price - Math.trunc(this.props.price)) * 100).toFixed(0)}
           </span>
-          <span className={styles.priceLabel}>/pcs</span>
+          <span className={styles.priceLabel}>€{this.props.label}</span>
         </div>
       </div>
     );

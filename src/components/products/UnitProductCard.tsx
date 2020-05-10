@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product, ProductUnit } from '../../redux/state';
+import { ProductUnit } from '../../redux/state';
 import Card from 'react-bootstrap/Card';
 import { mdiCartMinus, mdiCartPlus, mdiHeart } from '@mdi/js';
 import { setCartProductQuantity, toggleProductFavorite } from '../../redux/actions';
@@ -33,7 +33,7 @@ export default class UnitProductCard extends React.Component<Props, {}> {
           <div className="productFooter">
             <div className="productPriceCol">
               <span className="productSubPrice">{(product.unitPrice / product.unitMass).toFixed(2)}€/{product.massLabel ?? 'kg'}</span>
-              <Price price={product.unitPrice} label="/pcs" />
+              <Price price={product.unitPrice} label="/pc" />
             </div>
 
             <div className="productActionsCol">
