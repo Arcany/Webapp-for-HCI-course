@@ -74,7 +74,6 @@ export const defaultState: ApplicationState = {
       type: ProductType.UNIT,
       unitPrice: 0.45,
       unitMass: 0.25,
-      cartAmount: 2,
       imgPath: 'fruits/apple.jpg',
       isFavorite: true,
       categories: [
@@ -87,7 +86,6 @@ export const defaultState: ApplicationState = {
       type: ProductType.UNIT,
       unitPrice: 0.32,
       unitMass: 0.2,
-      cartAmount: 1,
       imgPath: 'fruits/pear.jpg',
       categories: [
         { primary: Cat.FruitsAndVegetables, sub: Cat.Sub.Fruits }
