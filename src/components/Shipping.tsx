@@ -187,7 +187,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                     </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group as={Col} controlId="County">
-                    <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>
+                    <Form.Label className="requiredFormFieldLabel">County</Form.Label>
                     <Form.Control
                       as="select"
                       custom
