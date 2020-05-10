@@ -41,9 +41,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
 
 
     const handleCustomSubmit = async (event: any) => {
-      if(event == true){
-        this.props.history.push('/');
-      }
+      this.props.history.push('/');
       closeProp();
       
       console.log(event);
