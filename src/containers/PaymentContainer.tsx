@@ -1,6 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { ConnectedProps, connect } from 'react-redux';
 import { ApplicationState } from '../redux/state';
+import { clearShoppingCart } from '../redux/actions';
 import Payment from '../components/Payment';
 
 
@@ -10,7 +11,7 @@ function mapStateToProps(state: ApplicationState): {} {
 }
 
 const mapDispathToProps = {
-  // TODO
+  clearShoppingCart
 };
 
 const connector = connect(mapStateToProps, mapDispathToProps);

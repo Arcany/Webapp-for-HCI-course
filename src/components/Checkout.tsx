@@ -28,6 +28,8 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     };
   }
   render() {
+    const cartIsEmpty = Object.entries(this.props.products).length === 0;
+
     const onModalClose = (isRemovingItem: boolean, id: string) => {
       if (isRemovingItem) {
         this.props.setCartProductQuantity(id, 0);
@@ -80,7 +82,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     );
 
     const cartItems = () => {
-      if (Object.entries(this.props.products).length === 0) {
+      if (cartIsEmpty) {
         return <b className={styles.emptyCart}>Your cart is empty!</b>;
       }
       return (
@@ -110,7 +112,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
       <div className={styles.underCard}>
         <div>
           <Link to="/shipping">
-            <Button className="primaryButton">
+            <Button disabled={cartIsEmpty ? true : false} className="primaryButton">
               Check out
             </Button>
           </Link>

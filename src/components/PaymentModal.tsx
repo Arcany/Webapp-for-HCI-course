@@ -1,5 +1,4 @@
 import React from 'react';
-import { BaseProduct } from '../redux/state';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 

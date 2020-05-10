@@ -1,9 +1,9 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
-type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction | AddOriginFilterAction | RemoveOriginFilterAction;
+type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction | AddOriginFilterAction | RemoveOriginFilterAction | ClearCartAction;
 
 function setCartProductQuantity(state: ApplicationState, action: SetCartProductQuantityAction): ApplicationState {
   // const newState: ApplicationState = {...state};
@@ -53,6 +53,15 @@ function removeOriginFilter(state: ApplicationState, action: RemoveOriginFilterA
   };
 }
 
+function clearShoppingCart(state: ApplicationState, action: ClearCartAction): ApplicationState {
+  return {
+    ...state,
+    products: Object.fromEntries(
+      Object.entries(state.products).map(([id, product]) => {return [id, {...product, cartAmount: undefined}];})
+    )
+  };
+}
+
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch (action.type) {
   case ActionTypes.SET_CART_PRODUCT_QUANTITY:
@@ -63,6 +72,8 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
     return addOriginFilter(state, action);
   case ActionTypes.REMOVE_ORIGIN_FILTER:
     return removeOriginFilter(state, action);
+  case ActionTypes.CLEAR_CART:
+    return clearShoppingCart(state, action);  
   default:
     return state;
   }

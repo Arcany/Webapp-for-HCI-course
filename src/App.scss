@@ -56,6 +56,18 @@ button.primaryButton:hover {
   background-color: $primaryColor;
   border-color: $primaryColor;
 }
+.primaryButton:disabled {
+  opacity: 0.5;
+  background-color: grey;
+  border-color: grey;
+}
+.primaryButton:disabled:hover {
+  opacity: 0.5;
+  background-color: grey;
+  border-color: grey;
+  box-shadow: 0 0;
+  cursor: default;
+}
 
 button.cartButton {
   background: none;

@@ -21,6 +21,10 @@ export interface RemoveOriginFilterAction {
   origin: string;
 }
 
+export interface ClearCartAction {
+  type: ActionTypes.CLEAR_CART;
+}
+
 export type setCartProductQuantity = typeof setCartProductQuantity;
 export type toggleProductFavorite = typeof toggleProductFavorite;
 export type AddOriginFilter = typeof addOriginFilter;
@@ -51,5 +55,11 @@ export function RemoveOriginFilter(origin: string): RemoveOriginFilterAction {
   return {
     type: ActionTypes.REMOVE_ORIGIN_FILTER,
     origin
+  };
+}
+
+export function clearShoppingCart(): ClearCartAction {
+  return {
+    type: ActionTypes.CLEAR_CART
   };
 }

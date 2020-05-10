@@ -13,7 +13,7 @@ type PaymentState = {
 
 class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentState, {}> {
   constructor(p: ReduxProps & RouteComponentProps) {
-    super(p)
+    super(p);
     this.state = {
       showModal: false
     };
@@ -41,9 +41,9 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
 
 
     const handleCustomSubmit = async (event: any) => {
-      this.props.history.push('/');
       closeProp();
-      
+      this.props.history.push('/');
+      this.props.clearShoppingCart();
       console.log(event);
       
     };
