@@ -86,7 +86,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                         <Form noValidate onSubmit={handleSubmit}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="Delivery method">
-                                    <Form.Label>Card type</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>
                                     <Form.Control 
                                         as="select" 
                                         custom
@@ -107,7 +107,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="First Name">
-                                    <Form.Label>First Name</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">First Name</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="First Name"
@@ -121,7 +121,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="Last Name">
-                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Last Name</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="Last Name"
@@ -138,7 +138,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                             
                             <Form.Row>
                                 <Form.Group as={Col} controlId="Address">
-                                    <Form.Label>Address</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Address</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="Address"
@@ -172,7 +172,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="City">
-                                    <Form.Label>City</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">City</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="City"
@@ -186,7 +186,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="County">
-                                    <Form.Label>Card type</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>
                                     <Form.Control 
                                         as="select" 
                                         custom
@@ -205,7 +205,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="Zip code">
-                                    <Form.Label>Zip code</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Zip code</Form.Label>
                                     <Form.Control 
                                         type="number" 
                                         name="Zip code"
@@ -222,7 +222,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="Phone Number">
-                                    <Form.Label>Phone Number</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Phone Number</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="Phone Number"

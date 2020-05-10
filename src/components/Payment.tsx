@@ -69,7 +69,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                         <Form noValidate onSubmit={handleSubmit}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="Payment Type">
-                                    <Form.Label>Payment type</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Payment type</Form.Label>
                                     <Form.Control 
                                     as="select" 
                                     custom
@@ -90,8 +90,8 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="Card Type">
-                                    <Form.Label>Card type</Form.Label>
-                                    <Form.Control 
+                                    <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>
+                                    <Form.Control
                                     as="select" 
                                     custom
                                     value={values['Card Type']}
@@ -109,7 +109,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="Expiration Date">
-                                    <Form.Label>Expiration Date</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Expiration Date</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="Expiration Date"
@@ -125,7 +125,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="Card Number">
-                                    <Form.Label>Card Number</Form.Label>
+                                    <Form.Label className="requiredFormFieldLabel">Card Number</Form.Label>
                                     <Form.Control 
                                         type="text" 
                                         name="Card Number"
@@ -140,8 +140,9 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="CVV">
-                                    <Form.Label>CVV </Form.Label>
+                                    <Form.Label  className="requiredFormFieldLabel">CVV</Form.Label>
                                     <Form.Control 
+                                        
                                         type="number" 
                                         name="CVV"
                                         placeholder="367"

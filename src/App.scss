@@ -80,3 +80,9 @@ svg.favIcon.active {
     stroke: none;
   }
 }
+
+.requiredFormFieldLabel:after {
+  content: '*';
+  font-weight: bold;
+  color: red;
+}
