@@ -1,13 +1,10 @@
 import React, { ChangeEvent } from 'react';
 import { ProductMap, CategoryMap, ProductType } from '../redux/state';
 import { ReduxProps } from '../containers/ShopViewContainer';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
 
 import styles from './ShopView.module.scss';
 import Icon from '@mdi/react';
-import { mdiChevronUp, mdiChevronDown, mdiCartPlus, mdiCartMinus, mdiHeart } from '@mdi/js';
+import { mdiChevronUp, mdiChevronDown } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
 import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
@@ -74,6 +71,7 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
       if (this.props.originFilters.includes(product.origin)) {
         return true;
       }
+      return false;
     }).map(([id, product]) => {
       switch (product.type) {
       case ProductType.UNIT:

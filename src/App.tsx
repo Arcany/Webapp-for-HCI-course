@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import ShopView from './containers/ShopViewContainer';
 import Checkout from './containers/CheckoutContainer';
 import Shipping from './containers/ShippingContainer';
