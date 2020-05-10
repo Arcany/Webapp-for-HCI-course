@@ -15,6 +15,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                 .matches(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/, 'Invalid expiration date'),
             'Card Number': yup.string().length(16, 'Incorrect card number').required(),
             'CVV': yup.number().required()
+                .typeError('CVV must be a number')
                 .min(100, 'CVV must be 3 numbers long')
                 .max(999, 'CVV must be 3 numbers long'),
             deliveryCheckbox: yup.bool(),

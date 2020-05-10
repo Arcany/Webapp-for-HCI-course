@@ -17,6 +17,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
             'City': yup.string().required(),
             'County': yup.string().required(),
             'Zip code': yup.number().required()
+                .typeError('Zip code must be a number')
                 .min(10000, 'Zip code must be 5 numbers long')
                 .max(99999, 'Zip code must be 5 numbers long'),
             'Phone Number': yup.string().required(),
@@ -206,7 +207,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                 <Form.Group as={Col} controlId="Zip code">
                                     <Form.Label>Zip code</Form.Label>
                                     <Form.Control 
-                                        type="text" 
+                                        type="number" 
                                         name="Zip code"
                                         placeholder="Zip code"
                                         value={values['Zip code']}
