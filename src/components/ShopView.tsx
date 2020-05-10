@@ -60,6 +60,12 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
             <Card.Text className={styles.productPrice}>{product.price}€</Card.Text>
           );
           break;
+        case PriceType.PER_LITRE:
+          priceComponent = (<div className={styles.productPrice}>
+            <span className={styles.productPriceNr}>{product.priceL}</span>
+            <span className={styles.productPriceLabel}>€/L</span>
+          </div>);
+          break;
       }
 
       return (
