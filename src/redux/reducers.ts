@@ -36,12 +36,12 @@ function toggleProductFavorite(state: ApplicationState, action: ToggleProductFav
 
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch (action.type) {
-    case ActionTypes.SET_CART_PRODUCT_QUANTITY:
-      return setCartProductQuantity(state, action);
-    case ActionTypes.TOGGLE_PRODUCT_FAVORITE:
-      return toggleProductFavorite(state, action);
-    default:
-      return state;
+  case ActionTypes.SET_CART_PRODUCT_QUANTITY:
+    return setCartProductQuantity(state, action);
+  case ActionTypes.TOGGLE_PRODUCT_FAVORITE:
+    return toggleProductFavorite(state, action);
+  default:
+    return state;
   }
 };
 

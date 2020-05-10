@@ -25,7 +25,8 @@ module.exports = {
     'consistent-return': 'warn',
     'default-case': 'warn',
     'quotes': ['error', 'single'],
-    'semi': ['error', 'always']
+    'semi': ['error', 'always'],
+    'indent': ['error', 2]
   },
   overrides: [
     {

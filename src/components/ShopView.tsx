@@ -10,6 +10,7 @@ import Icon from '@mdi/react';
 import { mdiChevronUp, mdiChevronDown, mdiCartPlus, mdiCartMinus, mdiHeart } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
 import UnitProductCard from './products/UnitProductCard';
+import MassProductCard from './products/MassProductCard';
 
 export interface StateProps {
   products: ProductMap;
@@ -62,9 +63,12 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
       return true;
     }).map(([id, product]) => {
       switch (product.type) {
-        case ProductType.UNIT:
-          return <UnitProductCard product={product} productId={id} toggleProductFavorite={this.props.toggleProductFavorite}
-              setCartProductQuantity={this.props.setCartProductQuantity} key={id} />;
+      case ProductType.UNIT:
+        return <UnitProductCard product={product} productId={id} toggleProductFavorite={this.props.toggleProductFavorite}
+          setCartProductQuantity={this.props.setCartProductQuantity} key={id} />;
+      case ProductType.MASS:
+        return <MassProductCard product={product} productId={id} toggleProductFavorite={this.props.toggleProductFavorite}
+          setCartProductQuantity={this.props.setCartProductQuantity} key={id} />;
       }
       return null;
     });

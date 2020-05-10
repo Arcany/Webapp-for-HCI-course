@@ -1,21 +1,21 @@
-import React from 'react';
-import { ProductUnit } from '../../redux/state';
-import Card from 'react-bootstrap/Card';
-import { mdiCartMinus, mdiCartPlus, mdiHeart } from '@mdi/js';
+import { ProductMass } from '../../redux/state';
 import { setCartProductQuantity, toggleProductFavorite } from '../../redux/actions';
-import Icon from '@mdi/react';
-import FormControl from 'react-bootstrap/FormControl';
+import { mdiCartMinus, mdiCartPlus, mdiHeart } from '@mdi/js';
+import Card from 'react-bootstrap/Card';
+import React from 'react';
 import Price from './Price';
 import PriceWide from './PriceWide';
+import Icon from '@mdi/react';
+import FormControl from 'react-bootstrap/FormControl';
 
 interface Props {
-  product: ProductUnit;
+  product: ProductMass;
   productId: string;
   setCartProductQuantity: setCartProductQuantity;
   toggleProductFavorite: toggleProductFavorite;
 }
 
-export default class UnitProductCard extends React.Component<Props, {}> {
+export default class MassProductCard extends React.Component<Props, {}> {
   render() {
     const product = this.props.product;
 
@@ -27,20 +27,19 @@ export default class UnitProductCard extends React.Component<Props, {}> {
         <Card.Body className="productBody">
           <Card.Title className="productName">{product.name}</Card.Title>
           <div className="productSubtitleRow">
-            <span className="productUnitWeight">{product.unitMass} {product.massLabel ?? 'kg'}</span>
+            <span className="productUnitWeight">{product.massIncrement} {product.massLabel ?? 'kg'}</span>
             <span className="productOrigin">{product.origin}</span>
           </div>
+
           <div className="productFooter">
             <div className="productPriceCol">
-              <span className="productSubPrice">{(product.unitPrice / product.unitMass).toFixed(2)}€/{product.massLabel ?? 'kg'}</span>
-              <Price price={product.unitPrice} label="/pc" />
+              <Price price={product.massPrice} label={`/${product.massLabel ?? 'kg'}`}/>
             </div>
 
             <div className="productActionsCol">
               {product.cartAmount !== undefined && product.cartAmount > 0 &&
-                <PriceWide price={product.unitPrice * (product.cartAmount ?? 0)}
-                  label={`${((product.cartAmount ?? 0) * product.unitMass).toFixed(2)} ${product.massLabel ?? 'kg'}`}
-                  size={14}/>
+                <PriceWide price={product.massPrice * product.massIncrement * (product.cartAmount ?? 0)}
+                  label={`${(product.massIncrement * (product.cartAmount ?? 0)).toFixed(2)} ${product.massLabel ?? 'kg'}`} />
               }
 
               <div className="productActions">
@@ -52,6 +51,7 @@ export default class UnitProductCard extends React.Component<Props, {}> {
                 </button>
                 <FormControl className="cartAmount" size="sm" value={product.cartAmount ?? 0}
                   onChange={(e) => this.props.setCartProductQuantity(this.props.productId, (parseInt(e.target.value) || 0))} />
+                kg
                 <button className="cartButton" onClick={() => this.props.setCartProductQuantity(this.props.productId, (product.cartAmount ?? 0) + 1)}>
                   <Icon path={mdiCartPlus} size={1.2} />
                 </button>
