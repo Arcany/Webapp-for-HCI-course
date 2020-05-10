@@ -125,14 +125,14 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
       <div className={styles.underCard}>
         <div>
           <Link to="/shipping">
-            <Button className="bootstrapButton">
+            <Button className="primaryButton">
               Check out
             </Button>
           </Link>
         </div>
         <div>
           <Link to="/">
-            <Button className="bootstrapButton">
+            <Button className="primaryButton">
               Back to shopping
             </Button>
           </Link>

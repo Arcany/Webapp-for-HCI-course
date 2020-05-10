@@ -84,7 +84,7 @@ class Shipping extends React.Component<ReduxProps, {}> {
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Link to="/checkout">
-                                        <Button className="bootstrapButton">
+                                        <Button className="primaryButton">
                                             BACK TO CHECKOUT
                                         </Button>
                                     </Link>
@@ -92,7 +92,7 @@ class Shipping extends React.Component<ReduxProps, {}> {
 
                                 <Form.Group as={Col}>
                                     <Link to="/payment">
-                                        <Button className="bootstrapButton">
+                                        <Button className="primaryButton">
                                             SUBMIT SHIPPING
                                         </Button>
                                     </Link>

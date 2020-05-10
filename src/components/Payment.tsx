@@ -54,12 +54,12 @@ class Payment extends React.Component<ReduxProps, {}> {
                         </Form.Text>
                         <div id="nupud">
                             <Link to="/shipping">
-                                <Button className="bootstrapButton">
+                                <Button className="primaryButton">
                                     BACK TO DELIVERY
                                 </Button>
                             </Link>
                             <Link to="/payment">
-                                <Button className="bootstrapButton">
+                                <Button className="primaryButton">
                                     SUBMIT PAYMENT
                                 </Button>
                             </Link>

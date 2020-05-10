@@ -36,12 +36,12 @@ Button {
   margin: 6px;
 }
 
-button.bootstrapButton {
+button.primaryButton {
   background-color: $primaryColor;
   border-color: $primaryColor;
 }
 
-button.bootstrapButton:hover {
+button.primaryButton:hover {
   box-shadow: 2px 3px $shadow-light;
   background-color: $primaryColor;
   border-color: $primaryColor;
