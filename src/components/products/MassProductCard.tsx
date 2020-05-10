@@ -38,8 +38,9 @@ export default class MassProductCard extends React.Component<Props, {}> {
 
             <div className="productActionsCol">
               {product.cartAmount !== undefined && product.cartAmount > 0 &&
-                <PriceWide price={product.massPrice * product.massIncrement * (product.cartAmount ?? 0)}
-                  label={`${(product.massIncrement * (product.cartAmount ?? 0)).toFixed(2)} ${product.massLabel ?? 'kg'}`} />
+                <PriceWide price={product.massPrice * product.massIncrement * (product.cartAmount ?? 0)} size={14}
+                  label={`${(product.massIncrement * (product.cartAmount ?? 0)).toFixed(2)} ${product.massLabel ?? 'kg'}`}
+                />
               }
 
               <div className="productActions">
@@ -49,9 +50,9 @@ export default class MassProductCard extends React.Component<Props, {}> {
                 <button className="cartButton" onClick={() => this.props.setCartProductQuantity(this.props.productId, (product.cartAmount ?? 0) - 1)}>
                   <Icon path={mdiCartMinus} size={1.2} />
                 </button>
+                {/* TODO: Allow entering the actual weight to the input. */}
                 <FormControl className="cartAmount" size="sm" value={product.cartAmount ?? 0}
                   onChange={(e) => this.props.setCartProductQuantity(this.props.productId, (parseInt(e.target.value) || 0))} />
-                kg
                 <button className="cartButton" onClick={() => this.props.setCartProductQuantity(this.props.productId, (product.cartAmount ?? 0) + 1)}>
                   <Icon path={mdiCartPlus} size={1.2} />
                 </button>

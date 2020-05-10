@@ -3,7 +3,7 @@ import styles from './PriceWide.module.scss';
 
 interface Props {
   price: number;
-  label: string;
+  label?: string;
   size?: number;
 }
 
@@ -18,8 +18,12 @@ export default class PriceWide extends React.Component<Props, {}> {
       <div className={styles.priceRoot} style={rootStyle}>
         <span className={styles.main}>{Math.trunc(this.props.price)}</span>
         <span className={styles.sub}>{((this.props.price - Math.trunc(this.props.price)) * 100).toFixed(0)}€</span>
-        <span className={styles.separator}>/</span>
-        <span className={styles.label}>{this.props.label}</span>
+        {this.props.label &&
+          <span className={styles.separator}>/</span>
+        }
+        {this.props.label &&
+          <span className={styles.label}>{this.props.label}</span>
+        }
       </div>
     );
   }
