@@ -5,11 +5,27 @@ import styles from './Payment.module.scss';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import PaymentModal from './PaymentModal';
 
+type PaymentState = {
+  showModal: boolean;
+}
 
-class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
+class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentState, {}> {
+  constructor(p: ReduxProps & RouteComponentProps) {
+    super(p)
+    this.state = {
+      showModal: false
+    };
+  }
   render() {
-
+    const showProp = () => {
+      this.setState({showModal: true});
+    };
+    const closeProp = () => {
+      this.setState({showModal: false});
+    };
+    
     const schema = yup.object().shape({
       'Expiration Date': yup.string().required()
         .matches(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/, 'Invalid expiration date'),
@@ -25,9 +41,13 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
 
 
     const handleCustomSubmit = async (event: any) => {
-      // Redirect to some page with form values
+      if(event == true){
+        this.props.history.push('/');
+      }
+      closeProp();
+      
       console.log(event);
-      this.props.history.push('/');
+      
     };
 
     const paymentMethods = [
@@ -49,7 +69,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
           <h1>Payment information</h1>
           <Formik
             validationSchema={schema}
-            onSubmit={handleCustomSubmit}
+            onSubmit={showProp}
             initialValues={{
               'Payment Type': 'Credit card',
               'Card Type': 'Visa',
@@ -168,7 +188,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                 <Form.Text className="text-muted">
                                     We'll never share your personal information with anyone else.
                 </Form.Text>
-
+                
                 <div id="nupud">
                   <Link to="/shipping">
                     <Button className="primaryButton">
@@ -180,6 +200,9 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
                                         SUBMIT PAYMENT
                   </Button>
 
+                </div>
+                <div>
+                  <PaymentModal onClose={(response: any) => handleCustomSubmit(response)} show={this.state.showModal}/>
                 </div>
               </Form>
             )}
