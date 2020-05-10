@@ -31,6 +31,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
       if (product.cartAmount) {
         if (product.priceKg) return (product.priceKg * product.cartAmount).toFixed(2);
         if (product.price) return (product.price * product.cartAmount).toFixed(2);
+        if (product.priceL) return (product.priceL * product.cartAmount).toFixed(2);
       } return (0).toFixed(2);
     };
 
@@ -42,7 +43,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
       return totalPrice.toFixed(2);
     };
 
-    const onModalClose = (isRemovingItem: boolean, id: string, product: Product) => {
+    const onModalClose = (isRemovingItem: boolean, id: string) => {
       if (isRemovingItem) {
         this.props.setCartProductQuantity(id, 0);
       }
@@ -68,7 +69,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     const cartItem = (product: Product, id: string) => {
       return (
         <div>
-          <CheckoutModal productProp={product} onClose={(response: any) => onModalClose(response, id, product)} show={this.state.showModal}/>
+          <CheckoutModal productProp={product} onClose={(response: any) => onModalClose(response, id)} show={this.state.showModal}/>
           <span className={styles.productName}>{product.name}</span>
           <span className={styles.productInformation}>
             <span className={styles.productItemButtons}>
