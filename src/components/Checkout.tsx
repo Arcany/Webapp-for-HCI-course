@@ -25,7 +25,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     this.state = {
       showModal: false
     };
-}
+  }
   render() {
     const cartItemPrice = (product: Product): string => {
       if (product.cartAmount) {
@@ -125,14 +125,14 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
       <div className={styles.underCard}>
         <div>
           <Link to="/shipping">
-            <Button>
+            <Button className="bootstrapButton">
               Check out
             </Button>
           </Link>
         </div>
         <div>
           <Link to="/">
-            <Button>
+            <Button className="bootstrapButton">
               Back to shopping
             </Button>
           </Link>

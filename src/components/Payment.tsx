@@ -1,6 +1,7 @@
 import React from 'react';
 import {ReduxProps} from '../containers/PaymentContainer';
-import {Button, Col, Form} from "react-bootstrap";
+import {Button, Col, Form} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 class Payment extends React.Component<ReduxProps, {}> {
@@ -52,14 +53,16 @@ class Payment extends React.Component<ReduxProps, {}> {
                             We'll never share your personal information with anyone else.
                         </Form.Text>
                         <div id="nupud">
-
-                            <Button variant="primary" type="submit" href="/shipping">
-                                BACK TO DELIVERY
-                            </Button>
-
-                            <Button variant="primary" type="submit">
-                                SUBMIT PAYMENT
-                            </Button>
+                            <Link to="/shipping">
+                                <Button className="bootstrapButton">
+                                    BACK TO DELIVERY
+                                </Button>
+                            </Link>
+                            <Link to="/payment">
+                                <Button className="bootstrapButton">
+                                    SUBMIT PAYMENT
+                                </Button>
+                            </Link>
                         </div>
                     </Form>
                 </div>

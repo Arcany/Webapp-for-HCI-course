@@ -1,6 +1,7 @@
 import React from 'react';
 import {ReduxProps} from '../containers/ShippingContainer';
 import {Button, Col, Form} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class Shipping extends React.Component<ReduxProps, {}> {
     render() {
@@ -82,14 +83,19 @@ class Shipping extends React.Component<ReduxProps, {}> {
                         <div id="nupud2">
                             <Form.Row>
                                 <Form.Group as={Col}>
-                                    <Button variant="primary" type="submit" href="/checkout">
-                                        BACK TO CHECKOUT
-                                    </Button>
+                                    <Link to="/checkout">
+                                        <Button className="bootstrapButton">
+                                            BACK TO CHECKOUT
+                                        </Button>
+                                    </Link>
                                 </Form.Group>
 
                                 <Form.Group as={Col}>
-                                    <Button variant="primary" type="submit" href="/payment">
-                                        SUBMIT SHIPPING</Button>
+                                    <Link to="/payment">
+                                        <Button className="bootstrapButton">
+                                            SUBMIT SHIPPING
+                                        </Button>
+                                    </Link>
                                 </Form.Group>
                             </Form.Row>
                         </div>

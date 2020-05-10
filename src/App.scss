@@ -36,6 +36,17 @@ Button {
   margin: 6px;
 }
 
+button.bootstrapButton {
+  background-color: $primaryColor;
+  border-color: $primaryColor;
+}
+
+button.bootstrapButton:hover {
+  box-shadow: 2px 3px $shadow-light;
+  background-color: $primaryColor;
+  border-color: $primaryColor;
+}
+
 button.cartButton {
   background: none;
   border: none;
