@@ -5,8 +5,14 @@ import Icon from '@mdi/react';
 import { mdiCart, mdiHeart } from '@mdi/js';
 
 import styles from './Topbar.module.scss';
+import { ReduxProps } from '../containers/TopbarContainer';
 
-class Topbar extends React.Component {
+export interface StateProps {
+  cartPrice: string;
+  cartItemCount: number;
+}
+
+class Topbar extends React.Component<ReduxProps, {}> {
   render() {
     return (
       <Navbar expand="lg" className={styles.topbar}>
@@ -22,6 +28,7 @@ class Topbar extends React.Component {
             </Link>
             <Link to="/checkout" className={styles.iconBtn}>
               <Icon path={mdiCart} size={1.3} />
+              <span className={styles.cartPrice}>{this.props.cartPrice}€</span>
             </Link>
           </div>
         </Navbar.Collapse>

@@ -5,7 +5,7 @@ import ShopView from './containers/ShopViewContainer';
 import Checkout from './containers/CheckoutContainer';
 import Shipping from './containers/ShippingContainer';
 import Payment from './containers/PaymentContainer';
-import Topbar from './components/Topbar';
+import Topbar from './containers/TopbarContainer';
 
 class App extends React.Component {
   render() {

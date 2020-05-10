@@ -89,9 +89,6 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
               <button className="cartButton" onClick={() => this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) + 1)}>
                 <Icon path={mdiCartPlus} size={1.2} />
               </button>
-              {/* <Button variant="outline-primary">
-                <Icon path={mdiCartPlus} size={1.2} />
-              </Button> */}
             </div>
           </Card.Body>
         </Card>

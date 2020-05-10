@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '../redux/state';
+import { Product, ProductMap } from '../redux/state';
 import { ReduxProps } from '../containers/CheckoutContainer';
 import styles from './Checkout.module.scss';
 import { Link } from 'react-router-dom';
@@ -10,9 +10,10 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { mdiCartPlus, mdiCartMinus } from '@mdi/js';
 import CheckoutModal from './CheckoutModal';
+import { cartItemPrice, getTotalPriceOfOrder } from '../util/price';
 
 export interface StateProps {
-  products: {[productId: string]: Product};
+  products: ProductMap;
 }
 
 type CheckoutState = {
@@ -27,22 +28,6 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     };
   }
   render() {
-    const cartItemPrice = (product: Product): string => {
-      if (product.cartAmount) {
-        if (product.priceKg) return (product.priceKg * product.cartAmount).toFixed(2);
-        if (product.price) return (product.price * product.cartAmount).toFixed(2);
-        if (product.priceL) return (product.priceL * product.cartAmount).toFixed(2);
-      } return (0).toFixed(2);
-    };
-
-    const getTotalPriceOfOrder = (): string => {
-      let totalPrice = 0;
-      Object.entries(this.props.products).forEach(([id, product]) => {
-        totalPrice += parseFloat(cartItemPrice(product));
-      });
-      return totalPrice.toFixed(2);
-    };
-
     const onModalClose = (isRemovingItem: boolean, id: string) => {
       if (isRemovingItem) {
         this.props.setCartProductQuantity(id, 0);
@@ -55,7 +40,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
         this.setState({showModal: true});
       } else {
         this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) - 1);
-      }  
+      }
     };
 
     const interceptManualAmountDecrease = (id: string, amount: number) => {
@@ -116,7 +101,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     const aboveCard = (
       <ListGroup className={styles.aboveCard}>
         <ListGroup.Item>
-          Total price of your order: {getTotalPriceOfOrder()}€
+          Total price of your order: {getTotalPriceOfOrder(this.props.products)}€
         </ListGroup.Item>
       </ListGroup>
     );
