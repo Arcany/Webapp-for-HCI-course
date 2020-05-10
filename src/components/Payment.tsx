@@ -1,6 +1,6 @@
 import React from 'react';
 import {ReduxProps} from '../containers/PaymentContainer';
-import {Button, Col, Form} from 'react-bootstrap';
+import {Button, Col, Form, Card} from 'react-bootstrap';
 import styles from './Payment.module.scss';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -44,145 +44,148 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps, {}> {
         ];
 
         return (
-            <div className={styles.payment}>
-                <Formik
-                    validationSchema={schema}
-                    onSubmit={handleCustomSubmit}
-                    initialValues={{
-                        'Payment Type': 'Credit card',
-                        'Card Type': 'Visa',
-                        'Expiration Date': '',
-                        'Card Number': '',
-                        'CVV': '',
-                        'Delivery Checkbox': true
-                    }}
-                >
-                    {({
-                        handleSubmit,
-                        handleChange,
-                        handleBlur,
-                        values,
-                        touched,
-                        isInvalid,
-                        errors
-                    }: any) => (
-                        <Form noValidate onSubmit={handleSubmit}>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="Payment Type">
-                                    <Form.Label className="requiredFormFieldLabel">Payment type</Form.Label>
-                                    <Form.Control 
-                                    as="select" 
-                                    custom
-                                    value={values['Payment Type']}
-                                    onChange={handleChange}
-                                    >
-                                        {paymentMethods.map(method => (
-                                            <option 
-                                                key={method.id} 
-                                                value={method.name}
-                                                disabled={method.available ? false : true}
-                                            >
-                                                {method.name}
-                                            </option>
-                                        ))}
-                                    </Form.Control>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="Card Type">
-                                    <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>
-                                    <Form.Control
-                                    as="select" 
-                                    custom
-                                    value={values['Card Type']}
-                                    onChange={handleChange}
-                                    >
-                                        {creditCards.map(method => (
-                                            <option 
-                                                key={method.id} 
-                                                value={method.name}
-                                                disabled={method.available ? false : true}
-                                            >
-                                                {method.name}
-                                            </option>
-                                        ))}
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group as={Col} controlId="Expiration Date">
-                                    <Form.Label className="requiredFormFieldLabel">Expiration Date</Form.Label>
-                                    <Form.Control 
-                                        type="text" 
-                                        name="Expiration Date"
-                                        placeholder="MM/YY"
-                                        value={values['Expiration Date']}
+            <Card className={styles.paymentCard}>
+                <Card.Body>
+                    <h1>Payment information</h1>
+                    <Formik
+                        validationSchema={schema}
+                        onSubmit={handleCustomSubmit}
+                        initialValues={{
+                            'Payment Type': 'Credit card',
+                            'Card Type': 'Visa',
+                            'Expiration Date': '',
+                            'Card Number': '',
+                            'CVV': '',
+                            'Delivery Checkbox': true
+                        }}
+                    >
+                        {({
+                            handleSubmit,
+                            handleChange,
+                            handleBlur,
+                            values,
+                            touched,
+                            isInvalid,
+                            errors
+                        }: any) => (
+                            <Form noValidate onSubmit={handleSubmit}>
+                                <Form.Row>
+                                    <Form.Group as={Col} controlId="Payment Type">
+                                        <Form.Label className="requiredFormFieldLabel">Payment type</Form.Label>
+                                        <Form.Control 
+                                        as="select" 
+                                        custom
+                                        value={values['Payment Type']}
                                         onChange={handleChange}
-                                        isInvalid={touched['Expiration Date'] && errors['Expiration Date']}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors['Expiration Date']}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="Card Number">
-                                    <Form.Label className="requiredFormFieldLabel">Card Number</Form.Label>
-                                    <Form.Control 
-                                        type="text" 
-                                        name="Card Number"
-                                        placeholder="1111 2222 3333 9999"
-                                        value={values['Card Number']}
+                                        >
+                                            {paymentMethods.map(method => (
+                                                <option 
+                                                    key={method.id} 
+                                                    value={method.name}
+                                                    disabled={method.available ? false : true}
+                                                >
+                                                    {method.name}
+                                                </option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Form.Group as={Col} controlId="Card Type">
+                                        <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>
+                                        <Form.Control
+                                        as="select" 
+                                        custom
+                                        value={values['Card Type']}
                                         onChange={handleChange}
-                                        isInvalid={touched['Card Number'] && errors['Card Number']}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors['Card Number']}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="CVV">
-                                    <Form.Label  className="requiredFormFieldLabel">CVV</Form.Label>
-                                    <Form.Control 
-                                        
-                                        type="number" 
-                                        name="CVV"
-                                        placeholder="367"
-                                        value={values['CVV']}
-                                        onChange={handleChange}
-                                        isInvalid={touched['CVV'] && errors['CVV']}
+                                        >
+                                            {creditCards.map(method => (
+                                                <option 
+                                                    key={method.id} 
+                                                    value={method.name}
+                                                    disabled={method.available ? false : true}
+                                                >
+                                                    {method.name}
+                                                </option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group as={Col} controlId="Expiration Date">
+                                        <Form.Label className="requiredFormFieldLabel">Expiration Date</Form.Label>
+                                        <Form.Control 
+                                            type="text" 
+                                            name="Expiration Date"
+                                            placeholder="MM/YY"
+                                            value={values['Expiration Date']}
+                                            onChange={handleChange}
+                                            isInvalid={touched['Expiration Date'] && errors['Expiration Date']}
                                         />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors['CVV']}
-                                    </Form.Control.Feedback>    
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Group controlId="Delivery Checkbox">
-                                <Form.Check 
-                                type="checkbox" 
-                                label="Use delivery address as card holder address"
-                                checked={values['Delivery Checkbox']}
-                                onChange={handleChange}
-                                />
-                            </Form.Group>
-                            <Form.Text className="text-muted">
-                                We'll never share your personal information with anyone else.
-                            </Form.Text>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors['Expiration Date']}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Form.Group as={Col} controlId="Card Number">
+                                        <Form.Label className="requiredFormFieldLabel">Card Number</Form.Label>
+                                        <Form.Control 
+                                            type="text" 
+                                            name="Card Number"
+                                            placeholder="1111 2222 3333 9999"
+                                            value={values['Card Number']}
+                                            onChange={handleChange}
+                                            isInvalid={touched['Card Number'] && errors['Card Number']}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors['Card Number']}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
 
-                            <div id="nupud">
-                                <Link to="/shipping">
-                                    <Button className="primaryButton">
-                                        BACK TO DELIVERY
+                                    <Form.Group as={Col} controlId="CVV">
+                                        <Form.Label  className="requiredFormFieldLabel">CVV</Form.Label>
+                                        <Form.Control 
+                                            
+                                            type="number" 
+                                            name="CVV"
+                                            placeholder="367"
+                                            value={values['CVV']}
+                                            onChange={handleChange}
+                                            isInvalid={touched['CVV'] && errors['CVV']}
+                                            />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors['CVV']}
+                                        </Form.Control.Feedback>    
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Group controlId="Delivery Checkbox">
+                                    <Form.Check 
+                                    type="checkbox" 
+                                    label="Use delivery address as card holder address"
+                                    checked={values['Delivery Checkbox']}
+                                    onChange={handleChange}
+                                    />
+                                </Form.Group>
+                                <Form.Text className="text-muted">
+                                    We'll never share your personal information with anyone else.
+                                </Form.Text>
+
+                                <div id="nupud">
+                                    <Link to="/shipping">
+                                        <Button className="primaryButton">
+                                            BACK TO DELIVERY
+                                        </Button>
+                                    </Link>
+                                    
+                                    <Button type="submit" className="primaryButton">
+                                        SUBMIT PAYMENT
                                     </Button>
-                                </Link>
-                                
-                                <Button type="submit" className="primaryButton">
-                                    SUBMIT PAYMENT
-                                </Button>
-                                
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>    
+                                    
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
+                </Card.Body>
+            </Card>          
         );
     }
 
