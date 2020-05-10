@@ -111,6 +111,11 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
     return (
       <div className={styles.container}>
         <div className={styles.sidebar}>
+          <div className={`${styles.primaryCategory} ${styles.noSubcategories}`}>
+            <NavLink exact={true} to="/" className={styles.header} activeClassName={styles.activeHeader}>
+              <span>All Categories</span>
+            </NavLink>
+          </div>
           {sidebarItems}
         </div>
         <div className={styles.productArea}>
