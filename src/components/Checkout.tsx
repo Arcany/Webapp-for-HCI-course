@@ -110,20 +110,16 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
 
     const underCard = (
       <div className={styles.underCard}>
-        <div>
-          <Link to="/shipping">
-            <Button disabled={cartIsEmpty ? true : false} className="primaryButton">
-              Check out
-            </Button>
-          </Link>
-        </div>
-        <div>
-          <Link to="/">
-            <Button className="primaryButton">
-              Back to shopping
-            </Button>
-          </Link>
-        </div>
+        <Link to="/">
+          <Button className="primaryButton">
+              Back to Shopping
+          </Button>
+        </Link>
+        <Link to="/shipping">
+          <Button disabled={cartIsEmpty ? true : false} className="primaryButton">
+              Proceed with Checkout
+          </Button>
+        </Link>
       </div>
     );
 

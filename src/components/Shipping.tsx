@@ -256,16 +256,20 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                 </Form.Row>
 
                 <div id="nupud2">
+                  <Link to="/">
+                    <Button className="primaryButton">
+                        Back to Shopping
+                    </Button>
+                  </Link>
                   <Link to="/checkout">
                     <Button className="primaryButton">
-                                            BACK TO CHECKOUT
+                      Back to Cart
                     </Button>
                   </Link>
 
                   <Button type="submit" className="primaryButton">
-                                        SUBMIT SHIPPING
+                    Proceed to Payment
                   </Button>
-
                 </div>
               </Form>
             )}

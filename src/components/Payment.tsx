@@ -34,7 +34,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
     
     const schema = yup.object().shape({
       'Expiration Date': yup.string().required()
-        .matches(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/, 'Invalid expiration date'),
+        .matches(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, 'Invalid expiration date'),
       'Card Number': yup.string().length(16, 'Incorrect card number').required(),
       'CVV': yup.number().required()
         .typeError('CVV must be a number')
@@ -200,16 +200,19 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                 </Form.Text>
                 
                 <div id="nupud">
-                  <Link to="/shipping">
+                  <Link to="/">
                     <Button className="primaryButton">
-                      BACK TO DELIVERY
+                        Back to Shopping
                     </Button>
                   </Link>
-
+                  <Link to="/shipping">
+                    <Button className="primaryButton">
+                      Back to Shipping
+                    </Button>
+                  </Link>
                   <Button type="submit" className="primaryButton">
-                    SUBMIT PAYMENT
+                    Order!
                   </Button>
-
                 </div>
                 <div>
                   <PaymentModal onClose={(response: any) => handleCustomSubmit(response)} show={this.state.showModal}/>
