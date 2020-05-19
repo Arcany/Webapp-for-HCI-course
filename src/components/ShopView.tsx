@@ -8,7 +8,7 @@ import { mdiChevronUp, mdiChevronDown } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
 import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
-import { Form } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
 
 export interface StateProps {
   products: ProductMap;
@@ -47,6 +47,12 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
         </div>
       );
     });
+
+    const noProductsFound = (
+      <Alert variant="warning">
+        No products found with currently applied filters
+      </Alert>
+    );
 
     const productCards = Object.entries(this.props.products).filter(([id, product]) => {
       const primary = this.props.match.params.primaryCategory;
@@ -115,7 +121,7 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
           </div>
 
           <div className={styles.productArea}>
-            {productCards}
+            {productCards.length > 0 ? productCards : noProductsFound}
           </div>
         </div>
       </div>
