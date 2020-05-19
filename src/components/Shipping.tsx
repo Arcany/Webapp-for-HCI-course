@@ -4,7 +4,12 @@ import {Button, Col, Form, Card} from 'react-bootstrap';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { ShippingInformationObject } from '../redux/state';
 import styles from './Shipping.module.scss';
+
+export interface StateProps {
+  shippingInformation: ShippingInformationObject;
+}
 
 class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
   render() {
@@ -50,9 +55,15 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
     ];
 
     const handleCustomSubmit = async (event: any) => {
-      // Redirect to some page with form values
-      console.log(event);
       this.props.history.push('/payment');
+    };
+
+    const handleCustomChange = (e: any) => {
+      if (e.target.value !== 'on') {
+        this.props.editShippingInformation(e.target.id, e.target.value);
+      } else {
+        this.props.editShippingInformation(e.target.id, e.target.checked);
+      }
     };
 
     return (
@@ -62,18 +73,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
           <Formik
             validationSchema={schema}
             onSubmit={handleCustomSubmit}
-            initialValues={{
-              'Delivery method': 'Scheduled delivery',
-              'First Name': '',
-              'Last Name': '',
-              'Address': '',
-              'Specifics about address': '',
-              'City': '',
-              'County': 'Tartu County',
-              'Zip code': '',
-              'Phone Number': '',
-              'Notes to Driver': ''
-            }}
+            initialValues={this.props.shippingInformation}
           >
             {({
               handleSubmit,
@@ -84,7 +84,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
               isInvalid,
               errors
             }: any) => (
-              <Form noValidate onSubmit={handleSubmit}>
+              <Form noValidate onSubmit={handleSubmit} onChange={(e: any) => handleCustomChange(e)}>
                 <Form.Row>
                   <Form.Group as={Col} controlId="Delivery method">
                     <Form.Label className="requiredFormFieldLabel">Card type</Form.Label>

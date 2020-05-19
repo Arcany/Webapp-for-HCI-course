@@ -25,6 +25,18 @@ export interface ClearCartAction {
   type: ActionTypes.CLEAR_CART;
 }
 
+export interface EditPaymentAction {
+  type: ActionTypes.EDIT_PAYMENT;
+  paymentPropertyKey: string;
+  paymentPropertyValue: string | boolean;
+}
+
+export interface EditShippingAction {
+  type: ActionTypes.EDIT_SHIPPING;
+  shippingPropertyKey: string;
+  shippingPropertyValue: string | boolean;
+}
+
 export type setCartProductQuantity = typeof setCartProductQuantity;
 export type toggleProductFavorite = typeof toggleProductFavorite;
 export type AddOriginFilter = typeof addOriginFilter;
@@ -61,5 +73,21 @@ export function RemoveOriginFilter(origin: string): RemoveOriginFilterAction {
 export function clearShoppingCart(): ClearCartAction {
   return {
     type: ActionTypes.CLEAR_CART
+  };
+}
+
+export function editPaymentInformation(paymentPropertyKey: string, paymentPropertyValue: string|boolean): EditPaymentAction {
+  return {
+    type: ActionTypes.EDIT_PAYMENT,
+    paymentPropertyKey,
+    paymentPropertyValue
+  };
+}
+
+export function editShippingInformation(shippingPropertyKey: string, shippingPropertyValue: string|boolean): EditShippingAction {
+  return {
+    type: ActionTypes.EDIT_SHIPPING,
+    shippingPropertyKey,
+    shippingPropertyValue
   };
 }

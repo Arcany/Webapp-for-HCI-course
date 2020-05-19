@@ -1,16 +1,18 @@
 import { withRouter } from 'react-router-dom';
 import { ConnectedProps, connect } from 'react-redux';
-import Shipping from '../components/Shipping';
+import Shipping, { StateProps } from '../components/Shipping';
 import { ApplicationState } from '../redux/state';
+import { editShippingInformation } from '../redux/actions';
 
-
-function mapStateToProps(state: ApplicationState): {} {
-  // TODO
-  return {};
+function mapStateToProps(state: ApplicationState): StateProps {
+  const res: StateProps = {
+    shippingInformation: state.shippingInformation,
+  };
+  return res;
 }
 
 const mapDispathToProps = {
-  // TODO
+  editShippingInformation
 };
 
 const connector = connect(mapStateToProps, mapDispathToProps);

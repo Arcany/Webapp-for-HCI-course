@@ -1,11 +1,17 @@
 import React from 'react';
 import {ReduxProps} from '../containers/PaymentContainer';
+import { PaymentInformationObject, ShippingInformationObject } from '../redux/state';
 import {Button, Col, Form, Card} from 'react-bootstrap';
 import styles from './Payment.module.scss';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import PaymentModal from './PaymentModal';
+
+export interface StateProps {
+  paymentInformation: PaymentInformationObject;
+  shippingInformation: ShippingInformationObject;
+}
 
 type PaymentState = {
   showModal: boolean;
@@ -47,6 +53,13 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       console.log(event);
       
     };
+    const handleCustomChange = (e: any) => {
+      if (e.target.value !== 'on') {
+        this.props.editPaymentInformation(e.target.id, e.target.value);
+      } else {
+        this.props.editPaymentInformation(e.target.id, e.target.checked);
+      }
+    };
 
     const paymentMethods = [
       {id: 1, name: 'Credit card', available: true},
@@ -61,6 +74,12 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       {id: 4, name: 'American Express', available: true},
     ];
 
+    const footerWithShippingDetails = Object.entries(this.props.shippingInformation).map(([key, value]) => {
+      if (value !== '') {
+        return <p key={key} className={styles.paymentPageShippingInfo}>{key}: {value}</p>;
+      } return undefined;
+    }).filter(value => value !== undefined);
+
     return (
       <Card className={styles.paymentCard}>
         <Card.Body>
@@ -68,14 +87,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
           <Formik
             validationSchema={schema}
             onSubmit={showProp}
-            initialValues={{
-              'Payment Type': 'Credit card',
-              'Card Type': 'Visa',
-              'Expiration Date': '',
-              'Card Number': '',
-              'CVV': '',
-              'Delivery Checkbox': true
-            }}
+            initialValues={this.props.paymentInformation}
           >
             {({
               handleSubmit,
@@ -86,7 +98,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
               isInvalid,
               errors
             }: any) => (
-              <Form noValidate onSubmit={handleSubmit}>
+              <Form noValidate onSubmit={handleSubmit} onChange={(e: any) => handleCustomChange(e)}>
                 <Form.Row>
                   <Form.Group as={Col} controlId="Payment Type">
                     <Form.Label className="requiredFormFieldLabel">Payment type</Form.Label>
@@ -184,18 +196,18 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                   />
                 </Form.Group>
                 <Form.Text className="text-muted">
-                                    We'll never share your personal information with anyone else.
+                  We'll never share your personal information with anyone else.
                 </Form.Text>
                 
                 <div id="nupud">
                   <Link to="/shipping">
                     <Button className="primaryButton">
-                                            BACK TO DELIVERY
+                      BACK TO DELIVERY
                     </Button>
                   </Link>
 
                   <Button type="submit" className="primaryButton">
-                                        SUBMIT PAYMENT
+                    SUBMIT PAYMENT
                   </Button>
 
                 </div>
@@ -206,6 +218,9 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
             )}
           </Formik>
         </Card.Body>
+        <Card.Footer>
+          {footerWithShippingDetails}
+        </Card.Footer>
       </Card>
     );
   }

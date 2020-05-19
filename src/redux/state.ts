@@ -34,11 +34,15 @@ export interface Category {
 
 export type CategoryMap = {[categoryName: string]: Category};
 export type ProductMap = {[productId: string]: Product};
+export type PaymentInformationObject = { [key: string]: string | boolean }
+export type ShippingInformationObject = { [key: string]: string | boolean }
 
 export interface ApplicationState {
   products: ProductMap;
   categories: CategoryMap;
   originFilters: string[];
+  paymentInformation: PaymentInformationObject;
+  shippingInformation: ShippingInformationObject;
 }
 
 const Cat = {
@@ -214,5 +218,27 @@ export const defaultState: ApplicationState = {
     }
   },
 
-  originFilters: []
+  originFilters: [],
+
+  paymentInformation: {
+    'Payment Type': 'Credit card',
+    'Card Type': 'Visa',
+    'Expiration Date': '',
+    'Card Number': '',
+    'CVV': '',
+    'Delivery Checkbox': true
+  },
+
+  shippingInformation: {
+    'Delivery method': 'Scheduled delivery',
+    'First Name': '',
+    'Last Name': '',
+    'Address': '',
+    'Specifics about address': '',
+    'City': '',
+    'County': 'Tartu County',
+    'Zip code': '',
+    'Phone Number': '',
+    'Notes to Driver': ''
+  }
 };

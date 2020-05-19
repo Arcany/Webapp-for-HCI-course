@@ -12,3 +12,9 @@ export const REMOVE_ORIGIN_FILTER = 'REMOVE_ORIGIN_FILTER';
 
 export type CLEAR_CART = 'CLEAR_CART';
 export const CLEAR_CART = 'CLEAR_CART';
+
+export type EDIT_PAYMENT = 'EDIT_PAYMENT';
+export const EDIT_PAYMENT = 'EDIT_PAYMENT';
+
+export type EDIT_SHIPPING = 'EDIT_SHIPPING';
+export const EDIT_SHIPPING = 'EDIT_SHIPPING';

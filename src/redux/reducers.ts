@@ -1,9 +1,9 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
-type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction | AddOriginFilterAction | RemoveOriginFilterAction | ClearCartAction;
+type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction | AddOriginFilterAction | RemoveOriginFilterAction | ClearCartAction | EditPaymentAction | EditShippingAction;
 
 function setCartProductQuantity(state: ApplicationState, action: SetCartProductQuantityAction): ApplicationState {
   // const newState: ApplicationState = {...state};
@@ -62,6 +62,30 @@ function clearShoppingCart(state: ApplicationState, action: ClearCartAction): Ap
   };
 }
 
+function editPaymentInformation(state: ApplicationState, action: EditPaymentAction): ApplicationState {
+  return {
+    ...state,
+    paymentInformation: Object.fromEntries(
+      Object.entries(state.paymentInformation).map(([key, value]) => {
+        if (key === action.paymentPropertyKey) return [key, action.paymentPropertyValue];
+        return [key, value];
+      })
+    )
+  };
+}
+
+function editShippingInformation(state: ApplicationState, action: EditShippingAction): ApplicationState {
+  return {
+    ...state,
+    shippingInformation: Object.fromEntries(
+      Object.entries(state.shippingInformation).map(([key, value]) => {
+        if (key === action.shippingPropertyKey) return [key, action.shippingPropertyValue];
+        return [key, value];
+      })
+    )
+  };
+}
+
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch (action.type) {
   case ActionTypes.SET_CART_PRODUCT_QUANTITY:
@@ -74,6 +98,10 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
     return removeOriginFilter(state, action);
   case ActionTypes.CLEAR_CART:
     return clearShoppingCart(state, action);  
+  case ActionTypes.EDIT_PAYMENT:
+    return editPaymentInformation(state, action);  
+  case ActionTypes.EDIT_SHIPPING:
+    return editShippingInformation(state, action);     
   default:
     return state;
   }

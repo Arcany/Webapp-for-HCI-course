@@ -15,10 +15,10 @@ class PaymentModal extends React.Component<ModalProps, {}> {
 
     return (
       <Modal show={this.props.show} onHide={handleClose} animation={false}>
-        <Modal.Body>Your order has been accepted. You will be notified when the courier is on their way!  Press "Yes" to be redirected to the home page.</Modal.Body>
+        <Modal.Body>Your order has been accepted. You will be notified when the courier is on their way!</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => handleClose(true)}>
-						Yes
+						Understood!
           </Button>
         </Modal.Footer>
       </Modal>
