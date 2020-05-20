@@ -34,8 +34,8 @@ export interface Category {
 
 export type CategoryMap = {[categoryName: string]: Category};
 export type ProductMap = {[productId: string]: Product};
-export type PaymentInformationObject = { [key: string]: string | boolean }
-export type ShippingInformationObject = { [key: string]: string | boolean }
+export type PaymentInformationObject = { [key: string]: string | boolean | undefined | string[] | boolean }
+export type ShippingInformationObject = { [key: string]: string | boolean | undefined | string[] | boolean }
 
 export interface ApplicationState {
   products: ProductMap;

@@ -58,3 +58,55 @@
   margin-right: 6px;
   font-size: 18px;
 }
+
+.cartButton {
+  padding: 0;
+  border: 0;
+  margin-right: 0;
+  background-color: transparent;
+  border-color: transparent;
+  &:hover {
+    border: 0;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  &:active {
+    border: 0;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  &:visited {
+    border: 0;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+.cartIcon {
+  color: black;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.25))
+}
+
+.cartDropdownToggle {
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  border-color: transparent;
+  &:hover {
+    border: 0;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  &:active {
+    border: 0 !important;
+    background-color: transparent;
+    background-color: transparent !important;
+  }
+}
+
+.cartDropdownItem {
+  &:hover {
+    cursor: default;
+    background-color: transparent;
+  }
+}

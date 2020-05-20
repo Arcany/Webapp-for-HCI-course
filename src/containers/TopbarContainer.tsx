@@ -5,8 +5,14 @@ import { withRouter } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 function mapStateToProps(state: ApplicationState): StateProps {
-  const res: StateProps = { cartPrice: '', cartItemCount: 0 };
+  const res: StateProps = { cartPrice: '', cartItemCount: 0, products: {} };
   let price = 0;
+
+  Object.entries(state.products).forEach(([id, item]) => {
+    if ((item.cartAmount ?? 0) > 0) {
+      res.products[id] = item;
+    }
+  });
 
   Object.entries(state.products).forEach(([id, product]) => {
     price += productPrice(product);

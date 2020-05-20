@@ -4,7 +4,7 @@ import { PaymentInformationObject, ShippingInformationObject } from '../redux/st
 import {Button, Col, Form, Card} from 'react-bootstrap';
 import styles from './Payment.module.scss';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Formik } from 'formik';
+import { Formik, FormikState } from 'formik';
 import * as yup from 'yup';
 import PaymentModal from './PaymentModal';
 
@@ -35,7 +35,8 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
     const schema = yup.object().shape({
       'Expiration Date': yup.string().required()
         .matches(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, 'Invalid expiration date'),
-      'Card Number': yup.string().length(16, 'Incorrect card number').required(),
+      'Card Number': yup.string().length(19, 'Card number must be 16 numbers long').required()
+        .matches(/^[^0-9]+$/, 'Card number must include numbers only'),
       'CVV': yup.number().required()
         .typeError('CVV must be a number')
         .min(100, 'CVV must be 3 numbers long')
@@ -53,12 +54,38 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       console.log(event);
       
     };
-    const handleCustomChange = (e: any) => {
-      if (e.target.value !== 'on') {
-        this.props.editPaymentInformation(e.target.id, e.target.value);
+    const handleCustomChange = (e: any, setFieldValue: any) => {
+      // Adding characters
+      let newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+      if (!e.nativeEvent.inputType ||e.nativeEvent.inputType !== 'deleteContentBackward') {
+        if (e.target.id === 'Expiration Date') {
+          if (e.target.value.length >= 5) {
+            newValue = e.target.value.substring(0,5);
+          } else if (e.target.value.length === 2) {
+            newValue = `${e.target.value}/`;
+          } else if (e.target.value.length === 3) {
+            newValue = `${e.target.value.substring(0,2)}/${e.target.value.substring(2,1)}`;
+          }
+        } else if (e.target.id === 'Card Number') {
+          const len = e.target.value.toString().length;
+          if (len === 20) {
+            newValue = e.target.value.substring(0,19);
+          } else if (len === 4 || len === 9 || len === 14) {
+            newValue = `${e.target.value} `;
+          }
+        } else if (e.target.id === 'CVV') {
+          const len = e.target.value.toString().length;
+          if (len === 4) {
+            newValue = e.target.value.substring(0,3);
+          }
+        }
       } else {
-        this.props.editPaymentInformation(e.target.id, e.target.checked);
+        if (e.target.id === 'Expiration Date' && e.target.value.length === 3) {
+          newValue = e.target.value.substring(0,2);
+        } 
       }
+      this.props.editPaymentInformation(e.target.id, newValue);
+      setFieldValue(e.target.id, newValue);
     };
 
     const paymentMethods = [
@@ -88,6 +115,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
             validationSchema={schema}
             onSubmit={showProp}
             initialValues={this.props.paymentInformation}
+            
           >
             {({
               handleSubmit,
@@ -96,9 +124,10 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
               values,
               touched,
               isInvalid,
-              errors
+              errors,
+              setFieldValue
             }: any) => (
-              <Form noValidate onSubmit={handleSubmit} onChange={(e: any) => handleCustomChange(e)}>
+              <Form noValidate onSubmit={handleSubmit} onChange={(e: any) => handleCustomChange(e, setFieldValue)}>
                 <Form.Row>
                   <Form.Group as={Col} controlId="Payment Type">
                     <Form.Label className="requiredFormFieldLabel">Payment type</Form.Label>

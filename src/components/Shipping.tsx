@@ -26,7 +26,8 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
         .typeError('Zip code must be a number')
         .min(10000, 'Zip code must be 5 numbers long')
         .max(99999, 'Zip code must be 5 numbers long'),
-      'Phone Number': yup.string().required(),
+      'Phone Number': yup.string().required()
+        .matches(/^((\+372)?\s{0,1}[1-9][0-9]{6,7})$/, 'Only Estonian phone numbers are accepted (with and without +372)'),
       'Notes to Driver': yup.string(),
     });
 
@@ -227,7 +228,7 @@ class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
                     <Form.Control
                       type="text"
                       name="Phone Number"
-                      placeholder="Phone Number"
+                      placeholder="+372 51234567"
                       value={values['Phone Number']}
                       onChange={handleChange}
                       isInvalid={touched['Phone Number'] && errors['Phone Number']}
