@@ -6,6 +6,7 @@ import Checkout from './containers/CheckoutContainer';
 import Shipping from './containers/ShippingContainer';
 import Payment from './containers/PaymentContainer';
 import Topbar from './containers/TopbarContainer';
+import FormSteps from './components/FormSteps';
 
 class App extends React.Component {
   render() {

@@ -1,0 +1,60 @@
+@import '../vars';
+
+.root {
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+$stepPadding: 40px;
+.step {
+  margin: 0;
+  font-weight: 500;
+  color: $defaultTextColor;
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) .line {
+    height: 2px;
+    width: 50px;
+    margin: 0 8px;
+    background-color: hsla(0, 0%, 60%, 1.0);
+    display: inline-block;
+
+    &.lineActive {
+      height: 3px;
+      background-color: $primaryColor;
+    }
+  }
+}
+
+// .step:not(:last-child):after {
+//   content: '';
+//   position: relative;
+//   display: block;
+//   width: $stepMargin * 2 - 6px;
+//   left: $stepMargin * 2 + 3px;
+//   height: 2px;
+//   background-color: blue;
+// }
+
+$stepNrSize: 30px;
+.stepNr {
+  display: inline-block;
+  text-align: center;
+  line-height: $stepNrSize;
+  margin-right: 12px;
+  background-color: $primaryColor;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  width: $stepNrSize;
+  height: $stepNrSize;
+  border-radius: 50%;
+}
+
+.inactive .stepNr {
+  background-color: hsla(0, 0%, 60%, 1.0);
+}

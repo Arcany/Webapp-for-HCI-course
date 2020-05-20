@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import { mdiCartPlus, mdiCartMinus } from '@mdi/js';
 import CheckoutModal from './CheckoutModal';
 import { cartItemPrice, getTotalPriceOfOrder } from '../util/price';
+import FormSteps from './FormSteps';
 
 export interface StateProps {
   products: ProductMap;
@@ -124,10 +125,13 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
     );
 
     return (
-      <div className={styles.checkout}>
-        {aboveCard}
-        {mainCheckoutCard}
-        {underCard}
+      <div className="flex-col">
+        <FormSteps stepIndex={0} />
+        <div className={styles.checkout}>
+          {aboveCard}
+          {mainCheckoutCard}
+          {underCard}
+        </div>
       </div>
     );
   }
