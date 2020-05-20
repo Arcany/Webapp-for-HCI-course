@@ -7,6 +7,8 @@ import Price from './Price';
 import PriceWide from './PriceWide';
 import Icon from '@mdi/react';
 import FormControl from 'react-bootstrap/FormControl';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 interface Props {
   product: ProductMass;
@@ -44,9 +46,15 @@ export default class MassProductCard extends React.Component<Props, {}> {
               }
 
               <div className="productActions">
-                <button className="cartButton" onClick={() => this.props.toggleProductFavorite(this.props.productId)}>
-                  <Icon path={mdiHeart} size={1.2} className={`favIcon ${product.isFavorite ? 'active' : ''}`} />
-                </button>
+                <OverlayTrigger placement="top" overlay={
+                  <Tooltip id="fav-tooltip">
+                    {product.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                  </Tooltip>
+                }>
+                  <button className="cartButton" onClick={() => this.props.toggleProductFavorite(this.props.productId)}>
+                    <Icon path={mdiHeart} size={1.2} className={`favIcon ${product.isFavorite ? 'active' : ''}`} />
+                  </button>
+                </OverlayTrigger>
                 <button className="cartButton" onClick={() => this.props.setCartProductQuantity(this.props.productId, (product.cartAmount ?? 0) - 1)}>
                   <Icon path={mdiCartMinus} size={1.2} />
                 </button>

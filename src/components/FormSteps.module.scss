@@ -8,7 +8,6 @@
   justify-content: center;
 }
 
-$stepPadding: 40px;
 .step {
   margin: 0;
   font-weight: 500;
@@ -29,16 +28,6 @@ $stepPadding: 40px;
     }
   }
 }
-
-// .step:not(:last-child):after {
-//   content: '';
-//   position: relative;
-//   display: block;
-//   width: $stepMargin * 2 - 6px;
-//   left: $stepMargin * 2 + 3px;
-//   height: 2px;
-//   background-color: blue;
-// }
 
 $stepNrSize: 30px;
 .stepNr {

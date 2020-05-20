@@ -6,7 +6,7 @@ import { mdiCart, mdiHeart } from '@mdi/js';
 import { ProductMap } from '../redux/state';
 import styles from './Topbar.module.scss';
 import { ReduxProps } from '../containers/TopbarContainer';
-import { Dropdown, ButtonGroup, Button } from 'react-bootstrap';
+import { Dropdown, ButtonGroup, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export interface StateProps {
   cartPrice: string;
@@ -36,7 +36,7 @@ class Topbar extends React.Component<ReduxProps, {}> {
               <Dropdown.Item className={styles.cartDropdownItem} key="totalPrice">
                 Total price: {this.props.cartPrice}€
               </Dropdown.Item>
-            </> 
+            </>
           );
         } return (
           <>
@@ -55,7 +55,7 @@ class Topbar extends React.Component<ReduxProps, {}> {
           <Icon path={mdiCart} size={1.3} />
           <span className={styles.cartPrice}>{this.props.cartPrice}€</span>
         </Link>
-        
+
         <Dropdown.Toggle className={styles.cartDropdownToggle} split id="dropdown-custom-2" />
         <Dropdown.Menu>
           {dropdownProducts()}
@@ -72,9 +72,15 @@ class Topbar extends React.Component<ReduxProps, {}> {
         <Navbar.Collapse id="basic-navbar-nav">
           <div className={styles.userActions}>
             {/* TODO: Do something else with the favorite. */}
-            <Link to="/checkout" className={styles.iconBtn}>
-              <Icon path={mdiHeart} size={1.3} className={styles.heartIcon} />
-            </Link>
+            <OverlayTrigger placement="bottom" overlay={
+              <Tooltip id="fav-tooltip">
+                Favorites
+              </Tooltip>
+            }>
+              <Link to="/checkout" className={styles.iconBtn}>
+                <Icon path={mdiHeart} size={1.3} className={styles.heartIcon} />
+              </Link>
+            </OverlayTrigger>
             {cartDropdown}
           </div>
         </Navbar.Collapse>
