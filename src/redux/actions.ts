@@ -1,4 +1,6 @@
 import * as ActionTypes from './actionTypes';
+import { ToastData } from './state';
+import shortid from 'shortid';
 
 export interface SetCartProductQuantityAction {
   type: ActionTypes.SET_CART_PRODUCT_QUANTITY;
@@ -91,3 +93,49 @@ export function editShippingInformation(shippingPropertyKey: string, shippingPro
     shippingPropertyValue
   };
 }
+
+
+
+export interface AddToastAction {
+  type: ActionTypes.ADD_TOAST;
+  toastData: ToastData;
+}
+
+export interface RemoveToastAction {
+  type: ActionTypes.REMOVE_TOAST;
+  toastId: string;
+}
+
+export function addToast(title: string, body: JSX.Element, delay: number|undefined = undefined): AddToastAction {
+  return {
+    type: ActionTypes.ADD_TOAST,
+    toastData: {
+      title,
+      body,
+      delay,
+      id: shortid.generate()
+    }
+  };
+}
+
+export function addToastWithId(id: string, title: string, body: JSX.Element, delay: number|undefined = undefined): AddToastAction {
+  return {
+    type: ActionTypes.ADD_TOAST,
+    toastData: {
+      id,
+      title,
+      body,
+      delay
+    }
+  };
+}
+
+export function removeToast(toastId: string): RemoveToastAction {
+  return {
+    type: ActionTypes.REMOVE_TOAST,
+    toastId
+  };
+}
+
+// export type AddToastFunction = typeof addToast;
+// export type RemoveToastFunc = typeof removeToast;

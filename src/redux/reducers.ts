@@ -1,9 +1,12 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
-type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction | AddOriginFilterAction | RemoveOriginFilterAction | ClearCartAction | EditPaymentAction | EditShippingAction;
+type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction
+    | AddOriginFilterAction | RemoveOriginFilterAction
+    | ClearCartAction | EditPaymentAction | EditShippingAction
+    | AddToastAction | RemoveToastAction;
 
 function setCartProductQuantity(state: ApplicationState, action: SetCartProductQuantityAction): ApplicationState {
   // const newState: ApplicationState = {...state};
@@ -86,6 +89,30 @@ function editShippingInformation(state: ApplicationState, action: EditShippingAc
   };
 }
 
+function addToast(state: ApplicationState, action: AddToastAction): ApplicationState {
+  return {
+    ...state,
+    toasts: {
+      ...state.toasts,
+      [action.toastData.id]: {
+        id: action.toastData.id,
+        title: action.toastData.title,
+        body: action.toastData.body,
+        delay: action.toastData.delay
+      }
+    }
+  };
+}
+
+function removeToast(state: ApplicationState, action: RemoveToastAction): ApplicationState {
+  return {
+    ...state,
+    toasts: Object.fromEntries(
+      Object.entries(state.toasts).filter(([id, toast]) => id !== action.toastId)
+    )
+  };
+}
+
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch (action.type) {
   case ActionTypes.SET_CART_PRODUCT_QUANTITY:
@@ -97,11 +124,15 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
   case ActionTypes.REMOVE_ORIGIN_FILTER:
     return removeOriginFilter(state, action);
   case ActionTypes.CLEAR_CART:
-    return clearShoppingCart(state, action);  
+    return clearShoppingCart(state, action);
   case ActionTypes.EDIT_PAYMENT:
-    return editPaymentInformation(state, action);  
+    return editPaymentInformation(state, action);
   case ActionTypes.EDIT_SHIPPING:
-    return editShippingInformation(state, action);     
+    return editShippingInformation(state, action);
+  case ActionTypes.ADD_TOAST:
+    return addToast(state, action);
+  case ActionTypes.REMOVE_TOAST:
+    return removeToast(state, action);
   default:
     return state;
   }

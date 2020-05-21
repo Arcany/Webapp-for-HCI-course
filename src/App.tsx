@@ -6,7 +6,7 @@ import Checkout from './containers/CheckoutContainer';
 import Shipping from './containers/ShippingContainer';
 import Payment from './containers/PaymentContainer';
 import Topbar from './containers/TopbarContainer';
-import FormSteps from './components/FormSteps';
+import ToastManager from './containers/ToastManagerContainer';
 
 class App extends React.Component {
   render() {
@@ -31,6 +31,7 @@ class App extends React.Component {
             Unknown route.
           </Route>
         </Switch>
+        <ToastManager />
       </div>
     );
   }

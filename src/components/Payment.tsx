@@ -1,9 +1,9 @@
 import React from 'react';
 import {ReduxProps} from '../containers/PaymentContainer';
 import { PaymentInformationObject, ShippingInformationObject } from '../redux/state';
-import {Button, Col, Form, Card} from 'react-bootstrap';
+import {Button, Col, Form, Card, Toast} from 'react-bootstrap';
 import styles from './Payment.module.scss';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Formik, FormikState } from 'formik';
 import * as yup from 'yup';
 import PaymentModal from './PaymentModal';
@@ -12,6 +12,7 @@ import FormSteps from './FormSteps';
 export interface StateProps {
   paymentInformation: PaymentInformationObject;
   shippingInformation: ShippingInformationObject;
+  cartHasContents: boolean;
 }
 
 type PaymentState = {
@@ -26,6 +27,11 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
     };
   }
   render() {
+    if (!this.props.cartHasContents) {
+      this.props.addToastWithId('payment-redirect', 'Your cart is empty', <span>Please place items into your cart before proceeding with checkout.</span>, 5000);
+      return <Redirect to="/" />;
+    }
+
     const showProp = () => {
       this.setState({showModal: true});
     };

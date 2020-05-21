@@ -1,3 +1,5 @@
+import React from 'react';
+
 export enum ProductType {
   UNIT = 'UNIT', MASS = 'MASS'
 }
@@ -37,12 +39,22 @@ export type ProductMap = {[productId: string]: Product};
 export type PaymentInformationObject = { [key: string]: string | boolean | undefined | string[] | boolean }
 export type ShippingInformationObject = { [key: string]: string | boolean | undefined | string[] | boolean }
 
+export interface ToastData {
+  id: string;
+  title: string;
+  body: JSX.Element;
+  delay?: number;
+}
+
+export type ToastMap = {[toastId: string]: ToastData}
+
 export interface ApplicationState {
   products: ProductMap;
   categories: CategoryMap;
   originFilters: string[];
   paymentInformation: PaymentInformationObject;
   shippingInformation: ShippingInformationObject;
+  toasts: ToastMap;
 }
 
 const Cat = {
@@ -240,5 +252,7 @@ export const defaultState: ApplicationState = {
     'Zip code': '',
     'Phone Number': '',
     'Notes to Driver': ''
-  }
+  },
+
+  toasts: {}
 };

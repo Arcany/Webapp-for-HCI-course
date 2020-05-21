@@ -18,3 +18,9 @@ export const EDIT_PAYMENT = 'EDIT_PAYMENT';
 
 export type EDIT_SHIPPING = 'EDIT_SHIPPING';
 export const EDIT_SHIPPING = 'EDIT_SHIPPING';
+
+export type ADD_TOAST = 'ADD_TOAST';
+export const ADD_TOAST = 'ADD_TOAST';
+
+export type REMOVE_TOAST = 'REMOVE_TOAST';
+export const REMOVE_TOAST = 'REMOVE_TOAST';
