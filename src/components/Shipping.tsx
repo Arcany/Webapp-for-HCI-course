@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReduxProps} from '../containers/ShippingContainer';
 import {Button, Col, Form, Card} from 'react-bootstrap';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { ShippingInformationObject } from '../redux/state';
@@ -10,10 +10,15 @@ import FormSteps from './FormSteps';
 
 export interface StateProps {
   shippingInformation: ShippingInformationObject;
+  cartHasContents: boolean;
 }
 
 class Shipping extends React.Component<ReduxProps & RouteComponentProps, {}> {
   render() {
+    if (!this.props.cartHasContents) {
+      this.props.addToastWithId('shipping-redirect', 'Your cart is empty', <span>Please place items into your cart before proceeding with checkout.</span>, 5000);
+      return <Redirect to="/" />;
+    }
 
     const schema = yup.object().shape({
       'Delivery method': yup.string().required(),
