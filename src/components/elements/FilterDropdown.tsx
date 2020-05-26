@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import FormCheck from 'react-bootstrap/FormCheck';
 import FormControl from 'react-bootstrap/FormControl';
+import Badge from 'react-bootstrap/Badge';
 import styles from './FilterDropdown.module.scss';
 
 export interface FilterDropdownProps {
@@ -26,6 +27,8 @@ export default class FilterDropdown extends React.Component<FilterDropdownProps,
   }
 
   render() {
+    const selectedItemCount = this.props.selectedItems.length;
+
     return (
       <Dropdown alignRight show={this.state.open} onToggle={(isOpen: boolean, event: SyntheticEvent<Dropdown>, metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' }) => {
         if (metadata.source === 'select') { // Prevent dropdown from closing, when a filter item is selected.
@@ -33,7 +36,10 @@ export default class FilterDropdown extends React.Component<FilterDropdownProps,
         }
         this.setState({open: isOpen});
       }}>
-        <Dropdown.Toggle id={this.props.id} className={'primaryButton'}>Origin</Dropdown.Toggle>
+        <Dropdown.Toggle id={this.props.id} className={'primaryButton'}>
+          Origin
+          <Badge variant="light" pill>{selectedItemCount > 0 ? selectedItemCount : ''}</Badge>
+        </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Header className={styles.header}>
             <FormControl value={this.state.filterString} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

@@ -93,6 +93,10 @@ button.dropdown-toggle.primaryButton {
   padding: 4px 8px;
   font-weight: 500;
 
+  & > span.badge {
+    margin-left: 8px;
+  }
+
   // Dropdown arrow
   &::after {
     margin-left: 10px;
