@@ -1,6 +1,6 @@
 import ShopView, { StateProps } from '../components/ShopView';
 import { ApplicationState } from '../redux/state';
-import { setCartProductQuantity, toggleProductFavorite, addOriginFilter, RemoveOriginFilter } from '../redux/actions';
+import { setCartProductQuantity, toggleProductFavorite, addOriginFilter, removeOriginFilter, clearFilters } from '../redux/actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -20,7 +20,8 @@ const mapDispatchToProps = {
   setCartProductQuantity,
   toggleProductFavorite,
   addOriginFilter,
-  RemoveOriginFilter
+  removeOriginFilter,
+  clearFilters
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

@@ -1,14 +1,16 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { ProductMap, CategoryMap, ProductType } from '../redux/state';
 import { ReduxProps } from '../containers/ShopViewContainer';
 
 import styles from './ShopView.module.scss';
 import Icon from '@mdi/react';
-import { mdiChevronUp, mdiChevronDown } from '@mdi/js';
+import { mdiChevronUp, mdiChevronDown, mdiClose } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
 import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
-import { Form, Alert } from 'react-bootstrap';
+import { Form, Alert, Button, Dropdown } from 'react-bootstrap';
+import { reach } from 'yup';
+import FilterDropdown from './elements/FilterDropdown';
 
 export interface StateProps {
   products: ProductMap;
@@ -101,24 +103,25 @@ class ShopView extends React.Component<ReduxProps & RouteComponentProps<RoutePro
           {sidebarItems}
         </div>
         <div className={styles.primaryContainer}>
-          <div className={styles.filterContainer}>
-            <span className={styles.tempHeader}>Origin:</span>
-            <div className={styles.toggleList}>
-              {Array.from(this.props.origins).map(origin => (
-                <Form.Group controlId={origin} className={styles.formGroup} key={origin}>
-                  <Form.Check label={origin} type="checkbox" checked={this.props.originFilters.includes(origin)}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      if (e.target.checked) {
-                        this.props.addOriginFilter(origin);
-                      } else {
-                        this.props.RemoveOriginFilter(origin);
-                      }
-                    }}
-                  />
-                </Form.Group>
-              ))}
+
+          <div className={styles.filters}>
+            <h5>Filters:</h5>
+            <div className={styles.filterContainer}>
+              <FilterDropdown id="filter-origin" items={Array.from(this.props.origins)} selectedItems={this.props.originFilters}
+                onItemSelect={(item: string, checked: boolean) => {
+                  if (checked) {
+                    this.props.addOriginFilter(item);
+                  } else {
+                    this.props.removeOriginFilter(item);
+                  }
+                }} />
             </div>
           </div>
+
+          <Button variant="secondary" size="sm" onClick={() => this.props.clearFilters()}>
+            <Icon path={mdiClose} size={0.65} />
+            Clear filters
+          </Button>
 
           <div className={styles.productArea}>
             {productCards.length > 0 ? productCards : noProductsFound}

@@ -59,6 +59,10 @@ export interface RemoveOriginFilterAction {
   origin: string;
 }
 
+export interface ClearFiltersAction {
+  type: ActionTypes.CLEAR_FILTERS;
+}
+
 export function addOriginFilter(origin: string): AddOriginFilterAction {
   return {
     type: ActionTypes.ADD_ORIGIN_FILTER,
@@ -66,10 +70,16 @@ export function addOriginFilter(origin: string): AddOriginFilterAction {
   };
 }
 
-export function RemoveOriginFilter(origin: string): RemoveOriginFilterAction {
+export function removeOriginFilter(origin: string): RemoveOriginFilterAction {
   return {
     type: ActionTypes.REMOVE_ORIGIN_FILTER,
     origin
+  };
+}
+
+export function clearFilters(): ClearFiltersAction {
+  return {
+    type: ActionTypes.CLEAR_FILTERS
   };
 }
 

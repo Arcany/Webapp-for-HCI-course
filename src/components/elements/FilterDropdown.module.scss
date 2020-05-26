@@ -1,0 +1,13 @@
+@import '../../vars';
+
+.header {
+  padding: 4px 10px;
+}
+
+.dropdownItem {
+  margin: 0;
+  padding: 4px 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

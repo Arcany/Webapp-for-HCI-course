@@ -1,11 +1,12 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
-type Action = SetCartProductQuantityAction | ToggleProductFavoriteAction
-    | AddOriginFilterAction | RemoveOriginFilterAction
-    | ClearCartAction | EditPaymentAction | EditShippingAction
+type Action = SetCartProductQuantityAction | ClearCartAction
+    | ToggleProductFavoriteAction
+    | AddOriginFilterAction | RemoveOriginFilterAction | ClearFiltersAction
+    | EditPaymentAction | EditShippingAction
     | AddToastAction | RemoveToastAction;
 
 function setCartProductQuantity(state: ApplicationState, action: SetCartProductQuantityAction): ApplicationState {
@@ -24,6 +25,17 @@ function setCartProductQuantity(state: ApplicationState, action: SetCartProductQ
   };
 }
 
+function clearShoppingCart(state: ApplicationState, action: ClearCartAction): ApplicationState {
+  return {
+    ...state,
+    products: Object.fromEntries(
+      Object.entries(state.products).map(([id, product]) => {return [id, {...product, cartAmount: undefined}];})
+    )
+  };
+}
+
+
+
 function toggleProductFavorite(state: ApplicationState, action: ToggleProductFavoriteAction): ApplicationState {
   return {
     ...state,
@@ -36,6 +48,8 @@ function toggleProductFavorite(state: ApplicationState, action: ToggleProductFav
     }
   };
 }
+
+
 
 function addOriginFilter(state: ApplicationState, action: AddOriginFilterAction): ApplicationState {
   return {
@@ -56,14 +70,14 @@ function removeOriginFilter(state: ApplicationState, action: RemoveOriginFilterA
   };
 }
 
-function clearShoppingCart(state: ApplicationState, action: ClearCartAction): ApplicationState {
+function clearFilters(state: ApplicationState, action: ClearFiltersAction): ApplicationState {
   return {
     ...state,
-    products: Object.fromEntries(
-      Object.entries(state.products).map(([id, product]) => {return [id, {...product, cartAmount: undefined}];})
-    )
+    originFilters: []
   };
 }
+
+
 
 function editPaymentInformation(state: ApplicationState, action: EditPaymentAction): ApplicationState {
   return {
@@ -88,6 +102,8 @@ function editShippingInformation(state: ApplicationState, action: EditShippingAc
     )
   };
 }
+
+
 
 function addToast(state: ApplicationState, action: AddToastAction): ApplicationState {
   return {
@@ -117,18 +133,24 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
   switch (action.type) {
   case ActionTypes.SET_CART_PRODUCT_QUANTITY:
     return setCartProductQuantity(state, action);
+  case ActionTypes.CLEAR_CART:
+    return clearShoppingCart(state, action);
+
   case ActionTypes.TOGGLE_PRODUCT_FAVORITE:
     return toggleProductFavorite(state, action);
+
   case ActionTypes.ADD_ORIGIN_FILTER:
     return addOriginFilter(state, action);
   case ActionTypes.REMOVE_ORIGIN_FILTER:
     return removeOriginFilter(state, action);
-  case ActionTypes.CLEAR_CART:
-    return clearShoppingCart(state, action);
+  case ActionTypes.CLEAR_FILTERS:
+    return clearFilters(state, action);
+
   case ActionTypes.EDIT_PAYMENT:
     return editPaymentInformation(state, action);
   case ActionTypes.EDIT_SHIPPING:
     return editShippingInformation(state, action);
+
   case ActionTypes.ADD_TOAST:
     return addToast(state, action);
   case ActionTypes.REMOVE_TOAST:

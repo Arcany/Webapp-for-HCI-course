@@ -54,12 +54,23 @@ Button {
 button.primaryButton {
   background-color: $primaryColor;
   border-color: $primaryColor;
+  border-radius: 3px;
+  box-shadow: 2px 2px 1px $shadow-light;
 }
 
 button.primaryButton:hover {
-  box-shadow: 2px 3px $shadow-light;
+  box-shadow: 3px 3px 3px $shadow-light;
   background-color: $primaryColor;
   border-color: $primaryColor;
+}
+button.primaryButton:not(.disabled):not(:disabled):active {
+  background-color: $primaryColorDark;
+  border-color: $primaryColorDark;
+}
+button.primaryButton:focus {
+  background-color: $primaryColor;
+  border-color: $primaryColor;
+  box-shadow: 2px 2px 1px $shadow-light;
 }
 .primaryButton:disabled {
   opacity: 0.5;
@@ -73,6 +84,26 @@ button.primaryButton:hover {
   box-shadow: 0 0;
   cursor: default;
 }
+
+.show > button.dropdown-toggle.primaryButton {
+  background-color: $primaryColorDark;
+  border-color: $primaryColorDark;
+}
+button.dropdown-toggle.primaryButton {
+  padding: 4px 8px;
+  font-weight: 500;
+
+  // Dropdown arrow
+  &::after {
+    margin-left: 10px;
+    vertical-align: 0.12rem;
+
+    border-top: 0.4rem solid;
+    border-right: 0.35rem solid transparent;
+    border-left: 0.35rem solid transparent;
+  }
+}
+
 
 button.cartButton {
   background: none;
