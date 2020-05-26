@@ -1,11 +1,11 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction, SetSearchFilterAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
 type Action = SetCartProductQuantityAction | ClearCartAction
     | ToggleProductFavoriteAction
-    | AddOriginFilterAction | RemoveOriginFilterAction | ClearFiltersAction
+    | AddOriginFilterAction | RemoveOriginFilterAction | SetSearchFilterAction | ClearFiltersAction
     | EditPaymentAction | EditShippingAction
     | AddToastAction | RemoveToastAction;
 
@@ -67,6 +67,13 @@ function removeOriginFilter(state: ApplicationState, action: RemoveOriginFilterA
     originFilters: [
       ...state.originFilters.filter(v => v !== action.origin),
     ]
+  };
+}
+
+function setSearchFilter(state: ApplicationState, action: SetSearchFilterAction): ApplicationState {
+  return {
+    ...state,
+    searchFilter: action.filter
   };
 }
 
@@ -143,6 +150,8 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
     return addOriginFilter(state, action);
   case ActionTypes.REMOVE_ORIGIN_FILTER:
     return removeOriginFilter(state, action);
+  case ActionTypes.SET_SEARCH_FILTER:
+    return setSearchFilter(state, action);
   case ActionTypes.CLEAR_FILTERS:
     return clearFilters(state, action);
 

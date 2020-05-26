@@ -50,6 +50,7 @@ export interface ApplicationState {
   products: ProductMap;
   categories: CategoryMap;
   originFilters: string[];
+  searchFilter: string;
   paymentInformation: PaymentInformationObject;
   shippingInformation: ShippingInformationObject;
   toasts: ToastMap;
@@ -239,6 +240,7 @@ export const defaultState: ApplicationState = {
   },
 
   originFilters: [],
+  searchFilter: '',
 
   paymentInformation: {
     'Payment Type': 'Credit card',

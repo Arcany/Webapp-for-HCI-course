@@ -8,7 +8,7 @@ export interface StateProps {
   toasts: ToastData[];
 }
 
-export default class ToastManager extends React.Component<ReduxProps, {}> {
+export default class ToastManager extends React.PureComponent<ReduxProps, {}> {
   render() {
     return (
       <div className={styles.toastContainer}>

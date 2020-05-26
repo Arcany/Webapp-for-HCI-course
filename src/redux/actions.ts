@@ -59,6 +59,11 @@ export interface RemoveOriginFilterAction {
   origin: string;
 }
 
+export interface SetSearchFilterAction {
+  type: ActionTypes.SET_SEARCH_FILTER;
+  filter: string;
+}
+
 export interface ClearFiltersAction {
   type: ActionTypes.CLEAR_FILTERS;
 }
@@ -74,6 +79,13 @@ export function removeOriginFilter(origin: string): RemoveOriginFilterAction {
   return {
     type: ActionTypes.REMOVE_ORIGIN_FILTER,
     origin
+  };
+}
+
+export function setSearchFilter(filter: string): SetSearchFilterAction {
+  return {
+    type: ActionTypes.SET_SEARCH_FILTER,
+    filter
   };
 }
 

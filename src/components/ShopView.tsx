@@ -1,4 +1,4 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
+import React from 'react';
 import { ProductMap, CategoryMap, ProductType } from '../redux/state';
 import { ReduxProps } from '../containers/ShopViewContainer';
 
@@ -8,8 +8,7 @@ import { mdiChevronUp, mdiChevronDown, mdiClose } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
 import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
-import { Form, Alert, Button, Dropdown } from 'react-bootstrap';
-import { reach } from 'yup';
+import { Alert, Button } from 'react-bootstrap';
 import FilterDropdown from './elements/FilterDropdown';
 
 export interface StateProps {
@@ -24,7 +23,7 @@ interface RouteProps {
   subCategory?: string;
 }
 
-class ShopView extends React.Component<ReduxProps & RouteComponentProps<RouteProps>, {}> {
+class ShopView extends React.PureComponent<ReduxProps & RouteComponentProps<RouteProps>, {}> {
   render() {
     const sidebarItems = Object.entries(this.props.categories).map(([name, category]) => {
       const isActive = name === this.props.match.params.primaryCategory;

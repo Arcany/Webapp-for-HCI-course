@@ -6,15 +6,16 @@ import { mdiCart, mdiHeart } from '@mdi/js';
 import { ProductMap } from '../redux/state';
 import styles from './Topbar.module.scss';
 import { ReduxProps } from '../containers/TopbarContainer';
-import { Dropdown, ButtonGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Dropdown, ButtonGroup, OverlayTrigger, Tooltip, FormControl } from 'react-bootstrap';
 
 export interface StateProps {
   cartPrice: string;
   cartItemCount: number;
   products: ProductMap;
+  searchFilter: string;
 }
 
-class Topbar extends React.Component<ReduxProps, {}> {
+class Topbar extends React.PureComponent<ReduxProps, {}> {
   render() {
     const dropdownProducts = () => {
       if (Object.keys(this.props.products).length === 0) {
@@ -68,22 +69,23 @@ class Topbar extends React.Component<ReduxProps, {}> {
         <Navbar.Brand className={styles.brand}>
           <Link to="/">Brand name</Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.toggleBtn} />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <div className={styles.userActions}>
-            {/* TODO: Do something else with the favorite. */}
-            <OverlayTrigger placement="bottom" overlay={
-              <Tooltip id="fav-tooltip">
+
+        <FormControl type="text" placeholder="Search..." value={this.props.searchFilter}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.props.setSearchFilter(e.target.value)} />
+
+        <div className={styles.userActions}>
+          {/* TODO: Do something else with the favorite. */}
+          <OverlayTrigger placement="bottom" overlay={
+            <Tooltip id="fav-tooltip">
                 Favorites
-              </Tooltip>
-            }>
-              <Link to="/checkout" className={styles.iconBtn}>
-                <Icon path={mdiHeart} size={1.3} className={styles.heartIcon} />
-              </Link>
-            </OverlayTrigger>
-            {cartDropdown}
-          </div>
-        </Navbar.Collapse>
+            </Tooltip>
+          }>
+            <Link to="/checkout" className={styles.iconBtn}>
+              <Icon path={mdiHeart} size={1.3} className={styles.heartIcon} />
+            </Link>
+          </OverlayTrigger>
+          {cartDropdown}
+        </div>
       </Navbar>
     );
   }

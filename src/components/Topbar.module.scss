@@ -2,6 +2,13 @@
 
 .topbar {
   background: $primaryColor;
+  justify-content: space-between;
+
+  input[type="text"] {
+    max-width: 400px;
+    margin: 4px 30px;
+    height: 36px;
+  }
 }
 
 .brand {
@@ -21,7 +28,6 @@
 }
 
 .userActions {
-  margin-left: auto;
 }
 
 .iconBtn {
@@ -53,6 +59,7 @@
 
 .cartPrice {
   color: $lightTextColor;
+  vertical-align: middle;
   font-weight: 600;
   margin-left: 4px;
   margin-right: 6px;

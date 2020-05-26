@@ -6,12 +6,19 @@ import { withRouter } from 'react-router-dom';
 
 function mapStateToProps(state: ApplicationState): StateProps {
   const res: StateProps = {
-    products: state.products,
+    products: {},
     categories: state.categories,
     originFilters: state.originFilters,
     origins: new Set<string>(Object.entries(state.products).filter(([id, product]) => product.origin)
       .map(([id, product]) => product.origin ?? ''))
   };
+  if (state.searchFilter && state.searchFilter.replace(/\s/g, '').length > 0) {
+    res.products = Object.fromEntries(Object.entries(state.products).filter(([id, product]) => {
+      return product.name.toLowerCase().includes(state.searchFilter.toLowerCase());
+    }));
+  } else {
+    res.products = state.products;
+  }
 
   return res;
 }

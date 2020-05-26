@@ -17,7 +17,7 @@ export interface FilterDropdownState {
   open: boolean;
 }
 
-export default class FilterDropdown extends React.Component<FilterDropdownProps, FilterDropdownState>{
+export default class FilterDropdown extends React.PureComponent<FilterDropdownProps, FilterDropdownState>{
   constructor(props: FilterDropdownProps) {
     super(props);
     this.state = {
