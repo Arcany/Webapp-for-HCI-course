@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.dropdownItem:focus {
+  outline: none;
+}
+
 .itemScrollView {
   overflow-y: auto;
   max-height: 260px;
