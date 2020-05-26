@@ -22,7 +22,7 @@ export default class FilterDropdown extends React.Component<FilterDropdownProps,
     super(props);
     this.state = {
       filterString: '',
-      open: false
+      open: true
     };
   }
 
@@ -47,20 +47,22 @@ export default class FilterDropdown extends React.Component<FilterDropdownProps,
             }} className={styles.dropdownFilter} type="text" size="sm" placeholder="Filter" />
           </Dropdown.Header>
           <Dropdown.Divider />
-          {this.props.items.filter((item) => item.toLowerCase().includes(this.state.filterString.toLowerCase())).map((item) => {
-            const isChecked = this.props.selectedItems.includes(item);
-            return (
-              <Dropdown.Item as="button" eventKey={item} key={item} className={styles.dropdownItem} onClick={() => {
-                console.log('Click');
-                if (this.props.onItemSelect) {
-                  this.props.onItemSelect(item, !isChecked);
-                }
-              }}>
-                <FormCheck type="checkbox" checked={isChecked} id={`filter-dropdown-item-check-${item}`} onChange={() => {return;}} />
-                <span>{item}</span>
-              </Dropdown.Item>
-            );
-          })}
+          <div className={styles.itemScrollView}>
+            {this.props.items.filter((item) => item.toLowerCase().includes(this.state.filterString.toLowerCase())).map((item) => {
+              const isChecked = this.props.selectedItems.includes(item);
+              return (
+                <Dropdown.Item as="button" eventKey={item} key={item} className={styles.dropdownItem} onClick={() => {
+                  console.log('Click');
+                  if (this.props.onItemSelect) {
+                    this.props.onItemSelect(item, !isChecked);
+                  }
+                }}>
+                  <FormCheck type="checkbox" checked={isChecked} id={`filter-dropdown-item-check-${item}`} onChange={() => {return;}} />
+                  <span>{item}</span>
+                </Dropdown.Item>
+              );
+            })}
+          </div>
         </Dropdown.Menu>
       </Dropdown>
     );

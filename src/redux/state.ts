@@ -107,6 +107,7 @@ export const defaultState: ApplicationState = {
     },
     'cherry': {
       name: 'Cherry',
+      origin: 'Lithuania',
       type: ProductType.MASS,
       massIncrement: 0.1,
       massLabel: Mass.KG,
@@ -118,6 +119,7 @@ export const defaultState: ApplicationState = {
     },
     'milk': {
       name: 'Milk',
+      origin: 'Estonia',
       type: ProductType.UNIT,
       unitPrice: 0.99,
       massLabel: Mass.L,
@@ -129,6 +131,7 @@ export const defaultState: ApplicationState = {
     },
     'yogurt': {
       name: 'Yogurt',
+      origin: 'Estonia',
       type: ProductType.UNIT,
       unitPrice: 0.95,
       massLabel: Mass.L,
@@ -140,6 +143,7 @@ export const defaultState: ApplicationState = {
     },
     'cheese': {
       name: 'Cheese',
+      origin: 'Poland',
       type: ProductType.UNIT,
       unitPrice: 1.15,
       unitMass: 0.4,
@@ -150,6 +154,7 @@ export const defaultState: ApplicationState = {
     },
     'carrot': {
       name: 'Carrot',
+      origin: 'Spain',
       type: ProductType.UNIT,
       unitMass: 0.3,
       unitPrice: 0.23,
@@ -160,6 +165,7 @@ export const defaultState: ApplicationState = {
     },
     'wbread': {
       name: 'White Bread',
+      origin: 'Estonia',
       type: ProductType.UNIT,
       unitMass: 0.5,
       unitPrice: 0.74,
@@ -170,6 +176,7 @@ export const defaultState: ApplicationState = {
     },
     'rbread': {
       name: 'Regular Bread',
+      origin: 'Estonia',
       type: ProductType.UNIT,
       unitMass: 0.4,
       unitPrice: 0.89,
@@ -180,6 +187,7 @@ export const defaultState: ApplicationState = {
     },
     'sausages': {
       name: 'Sausages',
+      origin: 'Sweden',
       type: ProductType.UNIT,
       unitMass: 0.5,
       unitPrice: 3.39,
@@ -190,6 +198,7 @@ export const defaultState: ApplicationState = {
     },
     'rawbeef': {
       name: 'Raw Beef',
+      origin: 'Russia',
       type: ProductType.UNIT,
       unitMass: 0.5,
       unitPrice: 4.49,
@@ -200,6 +209,7 @@ export const defaultState: ApplicationState = {
     },
     'buckwheat': {
       name: 'Buckwheat',
+      origin: 'Ukraine',
       type: ProductType.UNIT,
       unitMass: 1,
       unitPrice: 2.29,

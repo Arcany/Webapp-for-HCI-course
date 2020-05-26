@@ -11,3 +11,8 @@
   flex-direction: row;
   align-items: center;
 }
+
+.itemScrollView {
+  overflow-y: auto;
+  max-height: 260px;
+}
