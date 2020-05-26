@@ -22,7 +22,7 @@ export default class FilterDropdown extends React.Component<FilterDropdownProps,
     super(props);
     this.state = {
       filterString: '',
-      open: true
+      open: false
     };
   }
 
