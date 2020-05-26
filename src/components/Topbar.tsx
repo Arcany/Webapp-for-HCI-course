@@ -50,7 +50,7 @@ class Topbar extends React.Component<ReduxProps, {}> {
     };
 
     const cartDropdown = (
-      <Dropdown as={ButtonGroup}>
+      <Dropdown as={ButtonGroup} alignRight>
         <Link to="/checkout" className={styles.iconBtn}>
           <Icon path={mdiCart} size={1.3} />
           <span className={styles.cartPrice}>{this.props.cartPrice}€</span>
