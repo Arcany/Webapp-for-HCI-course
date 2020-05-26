@@ -24,7 +24,7 @@ export default class FormSteps extends React.Component<FormStepsProps, {}> {
     return (
       <div className={styles.root}>
         {steps.map((name, index) =>
-          <div className={`${styles.step} ${index > stepIndex ? styles.inactive : ''}`}>
+          <div className={`${styles.step} ${index > stepIndex ? styles.inactive : ''}`} key={index}>
             <span className={styles.stepNr}>
               {index + 1}
             </span>
