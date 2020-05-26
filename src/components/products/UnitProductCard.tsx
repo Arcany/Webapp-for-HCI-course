@@ -13,8 +13,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 interface Props {
   product: ProductUnit;
   productId: string;
-  setCartProductQuantity: setCartProductQuantity;
-  toggleProductFavorite: toggleProductFavorite;
+  setCartProductQuantity: typeof setCartProductQuantity;
+  toggleProductFavorite: typeof toggleProductFavorite;
 }
 
 export default class UnitProductCard extends React.Component<Props, {}> {

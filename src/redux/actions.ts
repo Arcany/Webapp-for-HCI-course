@@ -2,46 +2,18 @@ import * as ActionTypes from './actionTypes';
 import { ToastData } from './state';
 import shortid from 'shortid';
 
+/**
+ * Shopping cart
+ */
 export interface SetCartProductQuantityAction {
   type: ActionTypes.SET_CART_PRODUCT_QUANTITY;
   productId: string;
   quantity: number;
 }
 
-export interface ToggleProductFavoriteAction {
-  type: ActionTypes.TOGGLE_PRODUCT_FAVORITE;
-  productId: string;
-}
-
-export interface AddOriginFilterAction {
-  type: ActionTypes.ADD_ORIGIN_FILTER;
-  origin: string;
-}
-
-export interface RemoveOriginFilterAction {
-  type: ActionTypes.REMOVE_ORIGIN_FILTER;
-  origin: string;
-}
-
 export interface ClearCartAction {
   type: ActionTypes.CLEAR_CART;
 }
-
-export interface EditPaymentAction {
-  type: ActionTypes.EDIT_PAYMENT;
-  paymentPropertyKey: string;
-  paymentPropertyValue: string | boolean;
-}
-
-export interface EditShippingAction {
-  type: ActionTypes.EDIT_SHIPPING;
-  shippingPropertyKey: string;
-  shippingPropertyValue: string | boolean;
-}
-
-export type setCartProductQuantity = typeof setCartProductQuantity;
-export type toggleProductFavorite = typeof toggleProductFavorite;
-export type AddOriginFilter = typeof addOriginFilter;
 
 export function setCartProductQuantity(productId: string, quantity: number): SetCartProductQuantityAction {
   return {
@@ -51,11 +23,40 @@ export function setCartProductQuantity(productId: string, quantity: number): Set
   };
 }
 
+export function clearShoppingCart(): ClearCartAction {
+  return {
+    type: ActionTypes.CLEAR_CART
+  };
+}
+
+
+/**
+ * Favorites
+ */
+export interface ToggleProductFavoriteAction {
+  type: ActionTypes.TOGGLE_PRODUCT_FAVORITE;
+  productId: string;
+}
+
 export function toggleProductFavorite(productId: string): ToggleProductFavoriteAction {
   return {
     type: ActionTypes.TOGGLE_PRODUCT_FAVORITE,
     productId
   };
+}
+
+
+/**
+ * Filters
+ */
+export interface AddOriginFilterAction {
+  type: ActionTypes.ADD_ORIGIN_FILTER;
+  origin: string;
+}
+
+export interface RemoveOriginFilterAction {
+  type: ActionTypes.REMOVE_ORIGIN_FILTER;
+  origin: string;
 }
 
 export function addOriginFilter(origin: string): AddOriginFilterAction {
@@ -72,10 +73,20 @@ export function RemoveOriginFilter(origin: string): RemoveOriginFilterAction {
   };
 }
 
-export function clearShoppingCart(): ClearCartAction {
-  return {
-    type: ActionTypes.CLEAR_CART
-  };
+
+/**
+ * Payment and Shipping
+ */
+export interface EditPaymentAction {
+  type: ActionTypes.EDIT_PAYMENT;
+  paymentPropertyKey: string;
+  paymentPropertyValue: string | boolean;
+}
+
+export interface EditShippingAction {
+  type: ActionTypes.EDIT_SHIPPING;
+  shippingPropertyKey: string;
+  shippingPropertyValue: string | boolean;
 }
 
 export function editPaymentInformation(paymentPropertyKey: string, paymentPropertyValue: string|boolean): EditPaymentAction {
@@ -95,7 +106,9 @@ export function editShippingInformation(shippingPropertyKey: string, shippingPro
 }
 
 
-
+/**
+ * Toasts
+ */
 export interface AddToastAction {
   type: ActionTypes.ADD_TOAST;
   toastData: ToastData;
@@ -136,6 +149,3 @@ export function removeToast(toastId: string): RemoveToastAction {
     toastId
   };
 }
-
-// export type AddToastFunction = typeof addToast;
-// export type RemoveToastFunc = typeof removeToast;
