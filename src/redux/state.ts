@@ -1,5 +1,3 @@
-import React from 'react';
-
 export enum ProductType {
   UNIT = 'UNIT', MASS = 'MASS'
 }

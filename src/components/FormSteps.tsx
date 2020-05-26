@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './FormSteps.module.scss';
-import { Link } from 'react-router-dom';
 
 export interface FormStepsProps {
   stepIndex: number;
@@ -13,11 +12,11 @@ const steps = [
   'Payment'
 ];
 
-const links = [
-  '/checkout',
-  '/shipping',
-  '/payment'
-];
+// const links = [
+//   '/checkout',
+//   '/shipping',
+//   '/payment'
+// ];
 
 export default class FormSteps extends React.Component<FormStepsProps, {}> {
   render() {

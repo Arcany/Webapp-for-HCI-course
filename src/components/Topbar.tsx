@@ -6,7 +6,7 @@ import { mdiCart, mdiHeart } from '@mdi/js';
 import { ProductMap } from '../redux/state';
 import styles from './Topbar.module.scss';
 import { ReduxProps } from '../containers/TopbarContainer';
-import { Dropdown, ButtonGroup, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Dropdown, ButtonGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export interface StateProps {
   cartPrice: string;
@@ -28,23 +28,23 @@ class Topbar extends React.Component<ReduxProps, {}> {
       return Object.entries(this.props.products).map(([key, value]) => {
         if (key === lastEntryKey) {
           return (
-            <>
-              <Dropdown.Item className={styles.cartDropdownItem} key={key}>
+            <React.Fragment key={key}>
+              <Dropdown.Item className={styles.cartDropdownItem}>
                 {value.name} x{value.cartAmount ||''}
               </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item className={styles.cartDropdownItem} key="totalPrice">
+              <Dropdown.Item className={styles.cartDropdownItem}>
                 Total price: {this.props.cartPrice}€
               </Dropdown.Item>
-            </>
+            </React.Fragment>
           );
         } return (
-          <>
-            <Dropdown.Item className={styles.cartDropdownItem} key={key}>
+          <React.Fragment key={key}>
+            <Dropdown.Item className={styles.cartDropdownItem}>
               {value.name} x{value.cartAmount ||''}
             </Dropdown.Item>
             <Dropdown.Divider />
-          </>
+          </React.Fragment>
         );
       });
     };

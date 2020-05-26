@@ -1,10 +1,10 @@
 import React from 'react';
 import {ReduxProps} from '../containers/PaymentContainer';
 import { PaymentInformationObject, ShippingInformationObject } from '../redux/state';
-import {Button, Col, Form, Card, Toast} from 'react-bootstrap';
+import {Button, Col, Form, Card} from 'react-bootstrap';
 import styles from './Payment.module.scss';
 import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
-import { Formik, FormikState } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import PaymentModal from './PaymentModal';
 import FormSteps from './FormSteps';
