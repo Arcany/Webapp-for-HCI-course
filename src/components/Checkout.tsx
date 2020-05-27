@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductMap, Product } from '../redux/state';
+import { ProductMap, Product, BaseProduct } from '../redux/state';
 import { ReduxProps } from '../containers/CheckoutContainer';
 import styles from './Checkout.module.scss';
 import { Link } from 'react-router-dom';
@@ -15,17 +15,22 @@ import FormSteps from './FormSteps';
 
 export interface StateProps {
   products: ProductMap;
+  showUndoButton: boolean;
 }
 
 type CheckoutState = {
   showModal: boolean;
+  removableItem: BaseProduct | null;
+  removableProductId: string | null;
 }
 
 class Checkout extends React.Component<ReduxProps, CheckoutState> {
   constructor(p: ReduxProps) {
     super(p);
     this.state = {
-      showModal: false
+      showModal: false,
+      removableItem: null,
+      removableProductId: null
     };
   }
   render() {
@@ -33,6 +38,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
 
     const onModalClose = (isRemovingItem: boolean, id: string) => {
       if (isRemovingItem) {
+        this.props.setProductRemovalUndoButtonProduct(id);
         this.props.setCartProductQuantity(id, 0);
       }
       this.setState({showModal: false});
@@ -40,24 +46,28 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
 
     const interceptAmountDecrease = (id: string, product: Product ) => {
       if (product.cartAmount === 1) {
-        this.setState({showModal: true});
+        this.setState({showModal: true, removableItem: product, removableProductId: id});
       } else {
         this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) - 1);
       }
     };
 
-    const interceptManualAmountDecrease = (id: string, amount: number) => {
+    const interceptManualAmountDecrease = (id: string, amount: number, product: Product) => {
       if (amount < 1 || !amount) {
-        this.setState({showModal: true});
+        this.setState({showModal: true, removableItem: product, removableProductId: id});
       } else {
         this.props.setCartProductQuantity(id, amount);
       }
     };
 
+    const interceptUndoingLastCartRemoval = () => {
+      this.props.undoLastCartRemoval();
+      this.props.setProductRemovalUndoButtonProduct(null);
+    };
+
     const cartItem = (product: Product, id: string) => {
       return (
         <div>
-          <CheckoutModal productProp={product} onClose={(response: any) => onModalClose(response, id)} show={this.state.showModal}/>
           <span className={styles.productName}>{product.name}</span>
           <span className={styles.productInformation}>
             <span className={styles.productItemButtons}>
@@ -65,7 +75,7 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
                 <Icon path={mdiCartMinus} size={1.2} />
               </button>
               <FormControl className={styles.cartAmount} size="sm" value={product.cartAmount ?? 0}
-                onChange={(e) => interceptManualAmountDecrease(id, (parseInt(e.target.value) || 0))} />
+                onChange={(e) => interceptManualAmountDecrease(id, (parseInt(e.target.value) || 0), product)} />
               <button className="cartButton" onClick={() => this.props.setCartProductQuantity(id, (product.cartAmount ?? 0) + 1)}>
                 <Icon path={mdiCartPlus} size={1.2} />
               </button>
@@ -82,6 +92,17 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
       </ListGroup.Item>
     );
 
+    const cartUndoButton = () => {
+      if (!this.props.showUndoButton) {
+        return <></>;
+      } 
+      return (
+        <Card.Footer className={styles.cardFooter}>
+          <Button className={styles.undoButton + ' primaryButton'} onClick={() => interceptUndoingLastCartRemoval()}>UNDO last removal</Button>
+        </Card.Footer>
+      );
+    };
+
     const cartItems = () => {
       if (cartIsEmpty) {
         return <b className={styles.emptyCart}>Your cart is empty!</b>;
@@ -96,8 +117,11 @@ class Checkout extends React.Component<ReduxProps, CheckoutState> {
         <Card.Body>
           <ListGroup>
             {cartItems()}
+            <CheckoutModal productProp={this.state.removableItem} onClose={(response: any) => onModalClose(response, this.state.removableProductId ?? '')} show={this.state.showModal}/>
+
           </ListGroup>
         </Card.Body>
+        {cartUndoButton()}
       </Card>
     );
 

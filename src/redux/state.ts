@@ -55,6 +55,7 @@ export interface ApplicationState {
   paymentInformation: PaymentInformationObject;
   shippingInformation: ShippingInformationObject;
   toasts: ToastMap;
+  productRemovalUndoButtonProduct: {[key: string]: Product};
 }
 
 const Cat = {
@@ -267,5 +268,7 @@ export const defaultState: ApplicationState = {
     'Notes to Driver': ''
   },
 
-  toasts: {}
+  toasts: {},
+
+  productRemovalUndoButtonProduct: {}
 };

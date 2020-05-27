@@ -15,6 +15,15 @@ export interface ClearCartAction {
   type: ActionTypes.CLEAR_CART;
 }
 
+export interface SetProductRemovalUndoButtonProductAction {
+  type: ActionTypes.SET_PRODUCT_REMOVAL_UNDO_BUTTON_PRODUCT;
+  productId: string | null;
+} 
+
+export interface UndoLastCartRemovalAction {
+  type: ActionTypes.UNDO_LAST_CART_REMOVAL;
+}
+
 export function setCartProductQuantity(productId: string, quantity: number): SetCartProductQuantityAction {
   return {
     type: ActionTypes.SET_CART_PRODUCT_QUANTITY,
@@ -26,6 +35,19 @@ export function setCartProductQuantity(productId: string, quantity: number): Set
 export function clearShoppingCart(): ClearCartAction {
   return {
     type: ActionTypes.CLEAR_CART
+  };
+}
+
+export function setProductRemovalUndoButtonProduct(productId: string | null): SetProductRemovalUndoButtonProductAction {
+  return {
+    type: ActionTypes.SET_PRODUCT_REMOVAL_UNDO_BUTTON_PRODUCT,
+    productId
+  };
+}
+
+export function undoLastCartRemoval(): UndoLastCartRemovalAction {
+  return {
+    type: ActionTypes.UNDO_LAST_CART_REMOVAL
   };
 }
 

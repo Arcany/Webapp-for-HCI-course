@@ -15,7 +15,7 @@ class PaymentModal extends React.Component<ModalProps, {}> {
 
     return (
       <Modal show={this.props.show} onHide={handleClose} animation={false}>
-        <Modal.Body>Your order has been accepted. You will be notified when the courier is on their way!</Modal.Body>
+        <Modal.Body>Your order has been accepted. You will be notified when the courier is on their way! (No notification will be sent on this prototype, because it is out of scope)</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => handleClose(true)}>
 						Understood!

@@ -1,9 +1,9 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction, SetSearchFilterAction, SetFavoriteFilterAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction, SetSearchFilterAction, SetFavoriteFilterAction, SetProductRemovalUndoButtonProductAction, UndoLastCartRemovalAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
-type Action = SetCartProductQuantityAction | ClearCartAction
+type Action = SetCartProductQuantityAction | ClearCartAction | SetProductRemovalUndoButtonProductAction | UndoLastCartRemovalAction
     | ToggleProductFavoriteAction
     | AddOriginFilterAction | RemoveOriginFilterAction | SetFavoriteFilterAction | SetSearchFilterAction | ClearFiltersAction
     | EditPaymentAction | EditShippingAction
@@ -45,6 +45,23 @@ function toggleProductFavorite(state: ApplicationState, action: ToggleProductFav
         ...state.products[action.productId],
         isFavorite: !state.products[action.productId].isFavorite
       }
+    }
+  };
+}
+
+function setProductRemovalUndoButtonProduct(state: ApplicationState, action: SetProductRemovalUndoButtonProductAction): ApplicationState {
+  return {
+    ...state,
+    productRemovalUndoButtonProduct: action.productId ? {[action.productId]: state.products[action.productId]} : {}
+  };
+}
+
+function undoLastCartRemoval(state: ApplicationState, action: UndoLastCartRemovalAction): ApplicationState {
+  return {
+    ...state,
+    products: {
+      ...state.products,
+      ...state.productRemovalUndoButtonProduct
     }
   };
 }
@@ -150,6 +167,10 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
     return setCartProductQuantity(state, action);
   case ActionTypes.CLEAR_CART:
     return clearShoppingCart(state, action);
+  case ActionTypes.SET_PRODUCT_REMOVAL_UNDO_BUTTON_PRODUCT:
+    return setProductRemovalUndoButtonProduct(state, action);  
+  case ActionTypes.UNDO_LAST_CART_REMOVAL:
+    return undoLastCartRemoval(state, action);  
 
   case ActionTypes.TOGGLE_PRODUCT_FAVORITE:
     return toggleProductFavorite(state, action);

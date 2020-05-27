@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 type ModalProps = {
-	productProp: BaseProduct;
+	productProp: BaseProduct | null;
 	onClose: Function;
 	show: boolean;
 }
@@ -17,7 +17,7 @@ class CheckoutModal extends React.Component<ModalProps, {}> {
 
     return (
       <Modal show={this.props.show} onHide={handleClose} animation={false}>
-        <Modal.Body>Are you sure that you want to remove all of "{this.props.productProp.name}?"</Modal.Body>
+        <Modal.Body>Are you sure that you want to remove all of "{this.props.productProp?.name}?"</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => handleClose(true)}>
 						Yes
