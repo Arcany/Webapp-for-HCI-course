@@ -12,7 +12,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Topbar />
+        <Switch>
+          <Route path={['/checkout', '/shipping', '/payment']}>
+            <Topbar showSearch={false} />
+          </Route>
+          <Route path={['/:primaryCategory/:subCategory', '/:primaryCategory', '/']}>
+            <Topbar showSearch={true} />
+          </Route>
+          <Route>
+            <Topbar showSearch={false} />
+          </Route>
+        </Switch>
 
         <Switch>
           <Route path="/checkout">

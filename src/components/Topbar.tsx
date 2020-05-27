@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import Icon from '@mdi/react';
 import { mdiCart, mdiHeart } from '@mdi/js';
 import { ProductMap } from '../redux/state';
@@ -15,7 +15,11 @@ export interface StateProps {
   searchFilter: string;
 }
 
-class Topbar extends React.PureComponent<ReduxProps, {}> {
+export interface TopbarProps {
+  showSearch: boolean;
+}
+
+class Topbar extends React.PureComponent<ReduxProps & RouteComponentProps & TopbarProps, {}> {
   render() {
     const dropdownProducts = () => {
       if (Object.keys(this.props.products).length === 0) {
@@ -70,8 +74,10 @@ class Topbar extends React.PureComponent<ReduxProps, {}> {
           <Link to="/">Brand name</Link>
         </Navbar.Brand>
 
-        <FormControl type="text" placeholder="Search..." value={this.props.searchFilter}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.props.setSearchFilter(e.target.value)} />
+        {this.props.showSearch &&
+          <FormControl type="text" placeholder="Search..." value={this.props.searchFilter}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.props.setSearchFilter(e.target.value)} />
+        }
 
         <div className={styles.userActions}>
           {cartDropdown}
