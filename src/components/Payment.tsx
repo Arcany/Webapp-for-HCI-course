@@ -61,11 +61,12 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       console.log(event);
 
     };
-    const handleCustomChange = (e: any, setFieldValue: any) => {
+    const handleCustomChange = (e: any, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => any) => {
       // Adding characters
       let newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-      if (!e.nativeEvent.inputType ||e.nativeEvent.inputType !== 'deleteContentBackward') {
-        if (e.target.id === 'Expiration Date') {
+      let newCaretPosition: null | number = null;
+      if (e.target.id === 'Expiration Date') {
+        if (!e.nativeEvent.inputType ||e.nativeEvent.inputType !== 'deleteContentBackward') {
           if (e.target.value.length >= 5) {
             newValue = e.target.value.substring(0,5);
           } else if (e.target.value.length === 2) {
@@ -73,26 +74,27 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
           } else if (e.target.value.length === 3) {
             newValue = `${e.target.value.substring(0,2)}/${e.target.value.substring(2,1)}`;
           }
-        } else if (e.target.id === 'Card Number') {
-          const len = e.target.value.toString().length;
-          if (len === 20) {
-            newValue = e.target.value.substring(0,19);
-          } else if (len === 4 || len === 9 || len === 14) {
-            newValue = `${e.target.value} `;
-          }
-        } else if (e.target.id === 'CVV') {
-          const len = e.target.value.toString().length;
-          if (len === 4) {
-            newValue = e.target.value.substring(0,3);
+        } else {
+          if (e.target.value.length === 3) {
+            newValue = e.target.value.substring(0,2);
           }
         }
-      } else {
-        if (e.target.id === 'Expiration Date' && e.target.value.length === 3) {
-          newValue = e.target.value.substring(0,2);
+      } else if (e.target.id === 'Card Number') {
+        newCaretPosition = e.target.selectionStart;
+        const nr = newValue.replace(/\s/g, '');
+        newValue = '';
+        for (let i = 0; i < nr.length; i += 4) {
+          if (i !== 0) { newValue += ' '; }
+          newValue += nr.substr(i, 4);
         }
       }
       this.props.editPaymentInformation(e.target.id, newValue);
+
       setFieldValue(e.target.id, newValue);
+      // FIXME: Doesn't help. Value setting seems to happen later.
+      if (newCaretPosition !== null) {
+        e.target.setSelectionRange(newCaretPosition, newCaretPosition);
+      }
     };
 
     const paymentMethods = [
@@ -136,7 +138,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                 errors,
                 setFieldValue
               }: any) => (
-                <Form noValidate onSubmit={handleSubmit} onChange={(e: any) => handleCustomChange(e, setFieldValue)}>
+                <Form noValidate onSubmit={handleSubmit} onChange={(e: React.FormEvent<HTMLFormElement>) => handleCustomChange(e, setFieldValue)}>
                   <Form.Row>
                     <Form.Group as={Col} controlId="Payment Type">
                       <Form.Label className="requiredFormFieldLabel">Payment type</Form.Label>
@@ -197,6 +199,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                     <Form.Group as={Col} controlId="Card Number">
                       <Form.Label className="requiredFormFieldLabel">Card Number</Form.Label>
                       <Form.Control
+                        maxLength={19}
                         type="text"
                         name="Card Number"
                         placeholder="1111 2222 3333 9999"
@@ -212,8 +215,8 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                     <Form.Group as={Col} controlId="CVV">
                       <Form.Label  className="requiredFormFieldLabel">CVV</Form.Label>
                       <Form.Control
-
-                        type="number"
+                        maxLength={3}
+                        type="text"
                         name="CVV"
                         placeholder="367"
                         value={values['CVV']}

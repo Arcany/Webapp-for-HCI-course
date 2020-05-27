@@ -218,7 +218,8 @@ export const defaultState: ApplicationState = {
       imgPath: 'grains/buckwheat.jpg',
       categories: [
         { primary: Cat.Grains }
-      ]
+      ],
+      cartAmount: 1
     }
   },
 
