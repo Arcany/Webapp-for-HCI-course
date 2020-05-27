@@ -43,7 +43,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       'Expiration Date': yup.string().required()
         .matches(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, 'Invalid expiration date'),
       'Card Number': yup.string().length(19, 'Card number must be 16 numbers long').required()
-        .matches(/^[^0-9]+$/, 'Card number must include numbers only'),
+        .matches(/^([0-9]{4}\s?){4}$/, 'Card number must include numbers only'),
       'CVV': yup.number().required()
         .typeError('CVV must be a number')
         .min(100, 'CVV must be 3 numbers long')
@@ -105,7 +105,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       {id: 1, name: 'Visa', available: true},
       {id: 2, name: 'MasterCard', available: true},
       {id: 3, name: 'Maestro', available: true},
-      {id: 4, name: 'American Express', available: true},
+      // {id: 4, name: 'American Express', available: true},
     ];
 
     const footerWithShippingDetails = Object.entries(this.props.shippingInformation).map(([key, value]) => {
