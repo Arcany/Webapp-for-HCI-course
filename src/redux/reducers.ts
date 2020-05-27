@@ -1,11 +1,11 @@
 import { ApplicationState, defaultState } from './state';
-import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction, SetSearchFilterAction } from './actions';
+import { SetCartProductQuantityAction, ToggleProductFavoriteAction, AddOriginFilterAction, RemoveOriginFilterAction, ClearCartAction, EditPaymentAction, EditShippingAction, RemoveToastAction, AddToastAction, ClearFiltersAction, SetSearchFilterAction, SetFavoriteFilterAction } from './actions';
 import * as ActionTypes from './actionTypes';
 
 // Union of all actions.
 type Action = SetCartProductQuantityAction | ClearCartAction
     | ToggleProductFavoriteAction
-    | AddOriginFilterAction | RemoveOriginFilterAction | SetSearchFilterAction | ClearFiltersAction
+    | AddOriginFilterAction | RemoveOriginFilterAction | SetFavoriteFilterAction | SetSearchFilterAction | ClearFiltersAction
     | EditPaymentAction | EditShippingAction
     | AddToastAction | RemoveToastAction;
 
@@ -70,6 +70,13 @@ function removeOriginFilter(state: ApplicationState, action: RemoveOriginFilterA
   };
 }
 
+function setFavoriteFilter(state: ApplicationState, action: SetFavoriteFilterAction): ApplicationState {
+  return {
+    ...state,
+    favoriteFilter: action.filter
+  };
+}
+
 function setSearchFilter(state: ApplicationState, action: SetSearchFilterAction): ApplicationState {
   return {
     ...state,
@@ -80,7 +87,8 @@ function setSearchFilter(state: ApplicationState, action: SetSearchFilterAction)
 function clearFilters(state: ApplicationState, action: ClearFiltersAction): ApplicationState {
   return {
     ...state,
-    originFilters: []
+    originFilters: [],
+    favoriteFilter: false
   };
 }
 
@@ -150,6 +158,8 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
     return addOriginFilter(state, action);
   case ActionTypes.REMOVE_ORIGIN_FILTER:
     return removeOriginFilter(state, action);
+  case ActionTypes.SET_FAVORITE_FILTER:
+    return setFavoriteFilter(state, action);
   case ActionTypes.SET_SEARCH_FILTER:
     return setSearchFilter(state, action);
   case ActionTypes.CLEAR_FILTERS:

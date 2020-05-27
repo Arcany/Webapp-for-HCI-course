@@ -10,12 +10,14 @@ import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
 import { Alert, Button } from 'react-bootstrap';
 import FilterDropdown from './elements/FilterDropdown';
+import CheckboxButton from './elements/CheckboxButton';
 
 export interface StateProps {
   products: ProductMap;
   categories: CategoryMap;
   originFilters: string[];
   origins: Set<string>;
+  favoriteFilter: boolean;
 }
 
 interface RouteProps {
@@ -114,6 +116,9 @@ class ShopView extends React.PureComponent<ReduxProps & RouteComponentProps<Rout
                     this.props.removeOriginFilter(item);
                   }
                 }} />
+              <CheckboxButton checked={this.props.favoriteFilter} onClick={(checked) => {this.props.setFavoriteFilter(checked);}}>
+                Favorites
+              </CheckboxButton>
             </div>
           </div>
 

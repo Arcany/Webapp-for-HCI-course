@@ -74,16 +74,6 @@ class Topbar extends React.PureComponent<ReduxProps, {}> {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.props.setSearchFilter(e.target.value)} />
 
         <div className={styles.userActions}>
-          {/* TODO: Do something else with the favorite. */}
-          <OverlayTrigger placement="bottom" overlay={
-            <Tooltip id="fav-tooltip">
-                Favorites
-            </Tooltip>
-          }>
-            <Link to="/checkout" className={styles.iconBtn}>
-              <Icon path={mdiHeart} size={1.3} className={styles.heartIcon} />
-            </Link>
-          </OverlayTrigger>
           {cartDropdown}
         </div>
       </Navbar>

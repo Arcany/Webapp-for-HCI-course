@@ -142,3 +142,23 @@ svg.favIcon.active {
   font-weight: bold;
   color: red;
 }
+
+.checkboxButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 8px;
+  font-weight: 500;
+
+  .form-check {
+    height: 24px;
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+      margin-bottom: 4px;
+      margin-top: 4px;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+}

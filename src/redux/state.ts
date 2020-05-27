@@ -50,6 +50,7 @@ export interface ApplicationState {
   products: ProductMap;
   categories: CategoryMap;
   originFilters: string[];
+  favoriteFilter: boolean;
   searchFilter: string;
   paymentInformation: PaymentInformationObject;
   shippingInformation: ShippingInformationObject;
@@ -240,6 +241,7 @@ export const defaultState: ApplicationState = {
   },
 
   originFilters: [],
+  favoriteFilter: false,
   searchFilter: '',
 
   paymentInformation: {

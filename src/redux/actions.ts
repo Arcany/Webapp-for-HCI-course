@@ -59,6 +59,11 @@ export interface RemoveOriginFilterAction {
   origin: string;
 }
 
+export interface SetFavoriteFilterAction {
+  type: ActionTypes.SET_FAVORITE_FILTER;
+  filter: boolean;
+}
+
 export interface SetSearchFilterAction {
   type: ActionTypes.SET_SEARCH_FILTER;
   filter: string;
@@ -79,6 +84,13 @@ export function removeOriginFilter(origin: string): RemoveOriginFilterAction {
   return {
     type: ActionTypes.REMOVE_ORIGIN_FILTER,
     origin
+  };
+}
+
+export function setFavoriteFilter(filter: boolean): SetFavoriteFilterAction {
+  return {
+    type: ActionTypes.SET_FAVORITE_FILTER,
+    filter
   };
 }
 
