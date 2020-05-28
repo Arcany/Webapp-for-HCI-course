@@ -88,9 +88,10 @@ export const defaultState: ApplicationState = {
     'apple': {
       name: 'Apple',
       origin: 'Estonia',
-      type: ProductType.UNIT,
-      unitPrice: 0.45,
-      unitMass: 0.25,
+      type: ProductType.MASS,
+      massIncrement: 0.2,
+      massLabel: Mass.KG,
+      massPrice: 1.80,
       imgPath: 'fruits/apple.jpg',
       isFavorite: true,
       categories: [
@@ -100,9 +101,10 @@ export const defaultState: ApplicationState = {
     'pear': {
       name: 'Pear',
       origin: 'Latvia',
-      type: ProductType.UNIT,
-      unitPrice: 0.32,
-      unitMass: 0.2,
+      type: ProductType.MASS,
+      massIncrement: 0.2,
+      massLabel: Mass.KG,
+      massPrice: 1.60,
       imgPath: 'fruits/pear.jpg',
       categories: [
         { primary: Cat.FruitsAndVegetables, sub: Cat.Sub.Fruits }
@@ -158,9 +160,10 @@ export const defaultState: ApplicationState = {
     'carrot': {
       name: 'Carrot',
       origin: 'Spain',
-      type: ProductType.UNIT,
-      unitMass: 0.3,
-      unitPrice: 0.23,
+      type: ProductType.MASS,
+      massIncrement: 0.15,
+      massLabel: Mass.KG,
+      massPrice: 0.77,
       imgPath: 'vegetables/carrot.jpg',
       categories: [
         { primary: Cat.FruitsAndVegetables, sub: Cat.Sub.Vegetables }
@@ -219,8 +222,7 @@ export const defaultState: ApplicationState = {
       imgPath: 'grains/buckwheat.jpg',
       categories: [
         { primary: Cat.Grains }
-      ],
-      cartAmount: 1
+      ]
     }
   },
 
