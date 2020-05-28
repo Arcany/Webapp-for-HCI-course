@@ -6,9 +6,10 @@ import styles from './ShopView.module.scss';
 import Icon from '@mdi/react';
 import { mdiChevronUp, mdiChevronDown, mdiClose } from '@mdi/js';
 import { RouteComponentProps, NavLink } from 'react-router-dom';
+import { Alert, Button } from 'react-bootstrap';
+import FormControl from 'react-bootstrap/FormControl';
 import UnitProductCard from './products/UnitProductCard';
 import MassProductCard from './products/MassProductCard';
-import { Alert, Button } from 'react-bootstrap';
 import FilterDropdown from './elements/FilterDropdown';
 import CheckboxButton from './elements/CheckboxButton';
 
@@ -18,6 +19,7 @@ export interface StateProps {
   originFilters: string[];
   origins: Set<string>;
   favoriteFilter: boolean;
+  searchFilter: string;
 }
 
 interface RouteProps {
@@ -104,7 +106,8 @@ class ShopView extends React.PureComponent<ReduxProps & RouteComponentProps<Rout
           {sidebarItems}
         </div>
         <div className={styles.primaryContainer}>
-
+          <FormControl type="text" placeholder="Search..." value={this.props.searchFilter} className="search-input shop-view"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.props.setSearchFilter(e.target.value)} />
           <div className={styles.filters}>
             <h5>Filters:</h5>
             <div className={styles.filterContainer}>

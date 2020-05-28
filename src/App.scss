@@ -162,3 +162,18 @@ svg.favIcon.active {
     }
   }
 }
+
+$search-input-breakpoint: 780px;
+.search-input.shop-view {
+  margin: 4px 12px 0 12px;
+  max-width: 400px;
+
+  @media (min-width: $search-input-breakpoint) {
+    display: none;
+  }
+}
+.search-input.top-bar {
+  @media (max-width: $search-input-breakpoint) {
+    display: none;
+  }
+}

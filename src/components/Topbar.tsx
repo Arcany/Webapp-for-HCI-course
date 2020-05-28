@@ -75,7 +75,7 @@ class Topbar extends React.PureComponent<ReduxProps & RouteComponentProps & Topb
         </Navbar.Brand>
 
         {this.props.showSearch &&
-          <FormControl type="text" placeholder="Search..." value={this.props.searchFilter}
+          <FormControl type="text" placeholder="Search..." value={this.props.searchFilter} className="search-input top-bar"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.props.setSearchFilter(e.target.value)} />
         }
 
