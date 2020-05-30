@@ -254,7 +254,8 @@ export const defaultState: ApplicationState = {
     'Expiration Date': '',
     'Card Number': '',
     'CVV': '',
-    'Delivery Checkbox': true
+    'Delivery Checkbox': true,
+    'Zip code': ''
   },
 
   shippingInformation: {

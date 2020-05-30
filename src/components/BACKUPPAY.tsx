@@ -51,6 +51,10 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       deliveryCheckbox: yup.bool(),
       'Card Type': yup.string().required(),
       'Payment Type': yup.string().required(),
+      'Zip code': yup.number().required()
+      .typeError('Zip code must be a number')
+      .min(10000, 'Zip code must be 5 numbers long')
+      .max(99999, 'Zip code must be 5 numbers long'),
     });
 
 
@@ -241,7 +245,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                         value={values['Zip code']}
                         onChange={handleChange}
                         disabled={values['Delivery Checkbox']}
-                        isInvalid={touched['Zip code'] && errors['Zip code']}
+                        //isInvalid={touched['Zip code'] && errors['Zip code']}
                       />
                       <Form.Control.Feedback type="invalid">
                         {errors['Zip code']}

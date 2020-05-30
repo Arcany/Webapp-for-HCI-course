@@ -119,7 +119,7 @@ function editPaymentInformation(state: ApplicationState, action: EditPaymentActi
         if (key === action.paymentPropertyKey) return [key, action.paymentPropertyValue];
         return [key, value];
       })
-    )
+    ),
   };
 }
 
