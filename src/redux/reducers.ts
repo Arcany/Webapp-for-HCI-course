@@ -112,26 +112,35 @@ function clearFilters(state: ApplicationState, action: ClearFiltersAction): Appl
 
 
 function editPaymentInformation(state: ApplicationState, action: EditPaymentAction): ApplicationState {
-  return {
+  const res = {
     ...state,
-    paymentInformation: Object.fromEntries(
-      Object.entries(state.paymentInformation).map(([key, value]) => {
-        if (key === action.paymentPropertyKey) return [key, action.paymentPropertyValue];
-        return [key, value];
-      })
-    ),
+    // paymentInformation: Object.fromEntries(
+    //   Object.entries(state.paymentInformation).map(([key, value]) => {
+    //     if (key === action.paymentPropertyKey) return [key, action.paymentPropertyValue];
+    //     return [key, value];
+    //   })
+    // ),
+    paymentInformation: {
+      ...state.paymentInformation,
+      [action.paymentPropertyKey]: action.paymentPropertyValue
+    }
   };
+  return res;
 }
 
 function editShippingInformation(state: ApplicationState, action: EditShippingAction): ApplicationState {
   return {
     ...state,
-    shippingInformation: Object.fromEntries(
-      Object.entries(state.shippingInformation).map(([key, value]) => {
-        if (key === action.shippingPropertyKey) return [key, action.shippingPropertyValue];
-        return [key, value];
-      })
-    )
+    // shippingInformation: Object.fromEntries(
+    //   Object.entries(state.shippingInformation).map(([key, value]) => {
+    //     if (key === action.shippingPropertyKey) return [key, action.shippingPropertyValue];
+    //     return [key, value];
+    //   })
+    // )
+    shippingInformation: {
+      ...state.shippingInformation,
+      [action.shippingPropertyKey]: action.shippingPropertyValue
+    }
   };
 }
 
@@ -168,9 +177,9 @@ const updateState = (state: ApplicationState = defaultState, action: Action) => 
   case ActionTypes.CLEAR_CART:
     return clearShoppingCart(state, action);
   case ActionTypes.SET_PRODUCT_REMOVAL_UNDO_BUTTON_PRODUCT:
-    return setProductRemovalUndoButtonProduct(state, action);  
+    return setProductRemovalUndoButtonProduct(state, action);
   case ActionTypes.UNDO_LAST_CART_REMOVAL:
-    return undoLastCartRemoval(state, action);  
+    return undoLastCartRemoval(state, action);
 
   case ActionTypes.TOGGLE_PRODUCT_FAVORITE:
     return toggleProductFavorite(state, action);

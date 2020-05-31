@@ -51,7 +51,17 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       deliveryCheckbox: yup.bool(),
       'Card Type': yup.string().required(),
       'Payment Type': yup.string().required(),
+      'Delivery Checkbox': yup.boolean(),
+      'Billing Zip Code': yup.number().typeError('Zip code must be a number').when('Delivery Checkbox', {
+        is: true,
+        then: yup.number().notRequired(),
+        otherwise: yup.number()
+          .required('Zip code is required if not using shipping information')
+          .min(10000, 'Zip code must be 5 numbers long')
+          .max(99999, 'Zip code must be 5 numbers long')
+      })
     });
+
 
 
     const handleCustomSubmit = async (event: any) => {
@@ -108,7 +118,6 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       {id: 1, name: 'Visa', available: true},
       {id: 2, name: 'MasterCard', available: true},
       {id: 3, name: 'Maestro', available: true},
-      // {id: 4, name: 'American Express', available: true},
     ];
 
     const footerWithShippingDetails = Object.entries(this.props.shippingInformation).map(([key, value]) => {
@@ -117,7 +126,7 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
       } return undefined;
     }).filter(value => value !== undefined);
 
-    const zipCode = Object.entries(this.props.shippingInformation)[7][1]?.toString();
+    const zipCode = this.props.shippingInformation['Zip code']?.toString();
 
     return (
       <div className="flex-col">
@@ -232,21 +241,21 @@ class Payment extends React.Component<ReduxProps & RouteComponentProps,PaymentSt
                     </Form.Group>
                   </Form.Row>
                   <Form.Group as={Col} controlId="Billing Zip Code">
-                      <Form.Label  className="requiredFormFieldLabel">Billing Zip Code</Form.Label>
-                      <Form.Control
-                        maxLength={5}
-                        type="text"
-                        name="Billing Zip Code"
-                        placeholder={zipCode}
-                        value={values['Zip code']}
-                        onChange={handleChange}
-                        disabled={values['Delivery Checkbox']}
-                        isInvalid={touched['Zip code'] && errors['Zip code']}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {errors['Zip code']}
-                      </Form.Control.Feedback>
-                    </Form.Group>
+                    <Form.Label  className="requiredFormFieldLabel">Billing Zip Code</Form.Label>
+                    <Form.Control
+                      maxLength={5}
+                      type="text"
+                      name="Billing Zip Code"
+                      placeholder={zipCode}
+                      value={values['Delivery Checkbox'] ? zipCode : values['Billing Zip Code']}
+                      onChange={handleChange}
+                      disabled={values['Delivery Checkbox']}
+                      isInvalid={touched['Billing Zip Code'] && errors['Billing Zip Code']}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors['Zip code']}
+                    </Form.Control.Feedback>
+                  </Form.Group>
                   <Form.Group controlId="Delivery Checkbox">
                     <Form.Check
                       type="checkbox"
