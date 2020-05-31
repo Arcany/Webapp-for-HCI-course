@@ -222,8 +222,7 @@ export const defaultState: ApplicationState = {
       imgPath: 'grains/buckwheat.jpg',
       categories: [
         { primary: Cat.Grains }
-      ],
-      cartAmount: 1
+      ]
     }
   },
 
@@ -267,7 +266,7 @@ export const defaultState: ApplicationState = {
     'Specifics about address': '',
     'City': '',
     'County': 'Tartu County',
-    'Zip code': '54321',
+    'Zip code': '',
     'Phone Number': '',
     'Notes to Driver': ''
   },
