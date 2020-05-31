@@ -2,11 +2,11 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Icon from '@mdi/react';
-import { mdiCart, mdiHeart } from '@mdi/js';
+import { mdiCart } from '@mdi/js';
 import { ProductMap } from '../redux/state';
 import styles from './Topbar.module.scss';
 import { ReduxProps } from '../containers/TopbarContainer';
-import { Dropdown, ButtonGroup, OverlayTrigger, Tooltip, FormControl } from 'react-bootstrap';
+import { Dropdown, ButtonGroup, FormControl } from 'react-bootstrap';
 
 export interface StateProps {
   cartPrice: string;
